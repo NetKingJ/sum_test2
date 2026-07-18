@@ -1,0 +1,35 @@
+name: Window Seat OSINT
+
+on:
+  push:
+    branches:
+      - window-seat-osint
+    paths:
+      - '.github/workflows/window-seat-osint.yml'
+      - 'window-seat-osint/solve_adsbx.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  solve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out analysis branch
+        uses: actions/checkout@v4
+        with:
+          ref: window-seat-osint
+          fetch-depth: 0
+
+      - name: Download and parse ADS-B history
+        run: python3 window-seat-osint/solve_adsbx.py
+
+      - name: Commit analysis result
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add window-seat-result.json
+          git commit -m 'Add Window Seat ADS-B result' || exit 0
+          git push origin HEAD:window-seat-osint
