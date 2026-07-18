@@ -1,0 +1,218 @@
+name: whereami-reverse
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reverse-image-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out PR
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --quiet requests beautifulsoup4 lxml pillow
+
+      - name: Run reverse-image searches
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reverse-results
+          python - <<'PY'
+          import html as htmlmod
+          import json
+          import os
+          import re
+          import time
+          from pathlib import Path
+          from urllib.parse import urljoin, urlparse, parse_qs, unquote
+
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image
+
+          OUT = Path('reverse-results')
+          IMG = Path('whereami.jpg')
+          raw = IMG.read_bytes()
+          with Image.open(IMG) as im:
+              dims = im.size
+          log = []
+
+          def emit(*parts):
+              s = ' '.join(str(p) for p in parts)
+              print(s, flush=True)
+              log.append(s)
+
+          def save(name, data, binary=False):
+              p = OUT / name
+              if binary:
+                  p.write_bytes(data)
+              else:
+                  p.write_text(data, encoding='utf-8', errors='replace')
+              return p
+
+          def external_links(text, base=''):
+              soup = BeautifulSoup(text, 'lxml')
+              rows = []
+              for a in soup.select('a[href]'):
+                  href = urljoin(base, a.get('href', ''))
+                  label = ' '.join(a.get_text(' ', strip=True).split())
+                  if href.startswith('http'):
+                      rows.append((label[:240], href[:1000]))
+              return rows
+
+          emit('image bytes=', len(raw), 'dimensions=', dims)
+          headers = {
+              'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+              'Accept-Language': 'en-US,en;q=0.9,ru;q=0.7',
+          }
+          sess = requests.Session()
+          sess.headers.update(headers)
+
+          # Yandex reverse image upload.
+          for host in ('https://yandex.com', 'https://yandex.ru', 'https://yandex.kz'):
+              tag = urlparse(host).netloc.replace('.', '_')
+              try:
+                  request_block = {'blocks': [{'block': 'b-page_type_search-by-image__link'}]}
+                  params = {
+                      'rpt': 'imageview',
+                      'format': 'json',
+                      'request': json.dumps(request_block, separators=(',', ':')),
+                  }
+                  files = {'upfile': ('whereami.jpg', raw, 'image/jpeg')}
+                  r = sess.post(host + '/images/search', params=params, files=files, timeout=60)
+                  emit('YANDEX UPLOAD', host, r.status_code, r.url, r.headers.get('content-type'), 'len=', len(r.content))
+                  save(f'{tag}-upload.txt', r.text)
+                  result_urls = []
+                  try:
+                      j = r.json()
+                      save(f'{tag}-upload.json', json.dumps(j, ensure_ascii=False, indent=2))
+                      emit('YANDEX JSON KEYS', list(j)[:30])
+                      for block in j.get('blocks', []):
+                          p = block.get('params', {}) if isinstance(block, dict) else {}
+                          if isinstance(p, dict) and p.get('url'):
+                              u = p['url']
+                              if u.startswith('http'):
+                                  result_urls.append(u)
+                              else:
+                                  result_urls.append(host + '/images/search?' + u.lstrip('?'))
+                  except Exception as e:
+                      emit('YANDEX JSON PARSE ERROR', repr(e))
+
+                  # Fallbacks: locate cbir/result URLs in the payload.
+                  for m in re.findall(r'https?://[^"\\ ]+', r.text):
+                      if 'images/search' in m or 'cbir' in m:
+                          result_urls.append(htmlmod.unescape(m).replace('\\u0026', '&'))
+                  for m in re.findall(r'"url"\s*:\s*"([^"]+)"', r.text):
+                      u = m.replace('\\/', '/').replace('\\u0026', '&')
+                      if 'images/search' in u or 'cbir' in u:
+                          result_urls.append(u if u.startswith('http') else host + '/images/search?' + u.lstrip('?'))
+
+                  seen = set()
+                  for idx, u in enumerate(result_urls[:6]):
+                      if u in seen:
+                          continue
+                      seen.add(u)
+                      rr = sess.get(u, timeout=60, allow_redirects=True)
+                      emit('YANDEX RESULTS', host, idx, rr.status_code, rr.url, rr.headers.get('content-type'), 'len=', len(rr.content))
+                      save(f'{tag}-results-{idx}.html', rr.text)
+                      soup = BeautifulSoup(rr.text, 'lxml')
+                      emit('YANDEX TITLE', soup.title.get_text(' ', strip=True) if soup.title else '')
+                      # Extract visible text and likely result metadata.
+                      visible = ' '.join(soup.get_text(' ', strip=True).split())
+                      emit('YANDEX TEXT', visible[:3000])
+                      rows = external_links(rr.text, rr.url)
+                      for label, href in rows[:120]:
+                          if not any(x in urlparse(href).netloc for x in ('yandex.', 'ya.ru', 'yastatic.net')):
+                              emit('YANDEX EXTERNAL', label, href)
+                      # data-bem often contains result snippets and source URLs.
+                      for attr in soup.select('[data-bem]')[:300]:
+                          data_bem = attr.get('data-bem', '')
+                          if any(k in data_bem.lower() for k in ('serp-item', 'snippet', 'cbir', 'similar')):
+                              emit('YANDEX DATA-BEM', htmlmod.unescape(data_bem)[:2000])
+              except Exception as e:
+                  emit('YANDEX ERROR', host, repr(e))
+
+          # Google Lens file upload.
+          for endpoint in ('https://lens.google.com/v3/upload', 'https://lens.google.com/upload'):
+              tag = endpoint.rstrip('/').split('/')[-1]
+              try:
+                  files = {'encoded_image': ('whereami.jpg', raw, 'image/jpeg')}
+                  data = {'processed_image_dimensions': f'{dims[0]},{dims[1]}'}
+                  params = {'hl': 'en', 'stcs': str(int(time.time() * 1000)), 'ep': 'ccm'}
+                  r = sess.post(endpoint, params=params, data=data, files=files, timeout=60, allow_redirects=False)
+                  emit('GOOGLE UPLOAD', endpoint, r.status_code, r.url, 'location=', r.headers.get('location'), 'len=', len(r.content))
+                  save(f'google-{tag}-upload.html', r.text)
+                  loc = r.headers.get('location')
+                  targets = [loc] if loc else []
+                  if not targets and r.url != endpoint:
+                      targets.append(r.url)
+                  for idx, u in enumerate(targets):
+                      if not u:
+                          continue
+                      u = urljoin(endpoint, u)
+                      rr = sess.get(u, timeout=60, allow_redirects=True)
+                      emit('GOOGLE RESULTS', idx, rr.status_code, rr.url, rr.headers.get('content-type'), 'len=', len(rr.content))
+                      save(f'google-{tag}-results-{idx}.html', rr.text)
+                      soup = BeautifulSoup(rr.text, 'lxml')
+                      emit('GOOGLE TITLE', soup.title.get_text(' ', strip=True) if soup.title else '')
+                      visible = ' '.join(soup.get_text(' ', strip=True).split())
+                      emit('GOOGLE TEXT', visible[:5000])
+                      for label, href in external_links(rr.text, rr.url)[:300]:
+                          hostn = urlparse(href).netloc
+                          if hostn and not any(x in hostn for x in ('google.', 'gstatic.com', 'googleusercontent.com')):
+                              emit('GOOGLE EXTERNAL', label, href)
+                      # Pull textual labels/URLs from inline JSON.
+                      for pattern in (r'"title"\s*:\s*"([^"]{3,200})"', r'"url"\s*:\s*"(https?:[^" ]+)"'):
+                          vals = re.findall(pattern, rr.text)
+                          for val in vals[:120]:
+                              emit('GOOGLE JSON', htmlmod.unescape(val).replace('\\u003d', '=').replace('\\u0026', '&')[:1200])
+              except Exception as e:
+                  emit('GOOGLE ERROR', endpoint, repr(e))
+
+          # Bing reverse image upload.
+          try:
+              files = {
+                  'imgurl': (None, ''),
+                  'cbir': (None, 'sbi'),
+                  'imageBin': ('whereami.jpg', raw, 'image/jpeg'),
+              }
+              r = sess.post('https://www.bing.com/images/searchbyimage/upload', files=files, timeout=60, allow_redirects=False)
+              emit('BING UPLOAD', r.status_code, r.url, 'location=', r.headers.get('location'), 'len=', len(r.content))
+              save('bing-upload.html', r.text)
+              loc = r.headers.get('location')
+              if loc:
+                  rr = sess.get(urljoin(r.url, loc), timeout=60, allow_redirects=True)
+                  emit('BING RESULTS', rr.status_code, rr.url, rr.headers.get('content-type'), 'len=', len(rr.content))
+                  save('bing-results.html', rr.text)
+                  soup = BeautifulSoup(rr.text, 'lxml')
+                  emit('BING TITLE', soup.title.get_text(' ', strip=True) if soup.title else '')
+                  emit('BING TEXT', ' '.join(soup.get_text(' ', strip=True).split())[:5000])
+                  for label, href in external_links(rr.text, rr.url)[:300]:
+                      hostn = urlparse(href).netloc
+                      if hostn and 'bing.com' not in hostn and 'microsoft.com' not in hostn:
+                          emit('BING EXTERNAL', label, href)
+          except Exception as e:
+              emit('BING ERROR', repr(e))
+
+          save('results.txt', '\n'.join(log) + '\n')
+          PY
+
+      - name: Upload reverse-search output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reverse-results
+          path: reverse-results
+          if-no-files-found: warn
