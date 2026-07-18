@@ -1,4 +1,4 @@
-name: Temporary Whereami Exact Reverse Search
+name: Temporary Whereami Yandex Exact Search
 
 on:
   push:
@@ -26,22 +26,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install requests pillow
-      - name: Verify exact challenge image
-        run: |
-          cp whereami-reverse-search/whereami-original.jpg whereami-reverse-search/whereami-small.jpg
-          python - <<'PY'
-          from PIL import Image
-          p='whereami-reverse-search/whereami-small.jpg'
-          im=Image.open(p)
-          im.verify()
-          print('verified', Image.open(p).size)
-          PY
-      - run: python whereami-reverse-search/reverse.py
-      - name: Commit exact reverse results
+      - run: pip install requests
+      - run: python whereami-reverse-search/yandex_exact.py
+      - name: Commit Yandex result
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A whereami-reverse-search
-          git commit -m 'Update exact reverse-image engine results' || exit 0
+          git commit -m 'Update Yandex exact image results' || exit 0
           git push origin HEAD:whereami-reverse-search
