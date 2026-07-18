@@ -1,3 +1,3 @@
 Temporary OSINT reverse-image investigation branch.
 
-Generate compact keyword and domain summary from all engines.
+Harvest multilingual image search candidates and compare exact visual features.
