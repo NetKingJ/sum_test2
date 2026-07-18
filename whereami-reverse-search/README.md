@@ -1,3 +1,3 @@
 Temporary OSINT reverse-image investigation branch.
 
-Query Yandex's exact CBIR result pages.
+Create a ranked contact sheet from Yandex visual matches.
