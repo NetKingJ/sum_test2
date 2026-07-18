@@ -1,0 +1,231 @@
+name: whereami-investigate-v4
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  investigate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --quiet requests beautifulsoup4 lxml pillow selenium opencv-python-headless imagehash
+      - name: Compare candidates and expand reverse search
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p investigate-v4
+          python - <<'PY'
+          import io, os, re, json, time, zipfile, html as htmlmod
+          from pathlib import Path
+          from urllib.parse import urlencode, urljoin, urlparse, quote
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image, ImageOps, ImageDraw, ImageFont
+          import imagehash
+          import cv2
+          import numpy as np
+
+          OUT=Path('investigate-v4'); OUT.mkdir(exist_ok=True)
+          log=[]
+          def emit(*x):
+              s=' '.join(map(str,x)); print(s,flush=True); log.append(s)
+          def save(name,data,binary=False):
+              p=OUT/name
+              if binary: p.write_bytes(data)
+              else: p.write_text(data,encoding='utf-8',errors='replace')
+              return p
+          headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36','Accept-Language':'en-US,en;q=0.9,ru;q=0.8,mn;q=0.7'}
+          s=requests.Session(); s.headers.update(headers)
+
+          # Full-resolution challenge image from Acrobat rendition.
+          zip_url='https://to.adobe.com/eJIDMSLqUkpKwC5ftTM47dOwrNcK'
+          r=s.get(zip_url,timeout=90,allow_redirects=True)
+          emit('ADOBE',r.status_code,r.url,r.headers.get('content-type'),len(r.content))
+          image_bytes=None
+          if r.content[:2]==b'PK':
+              z=zipfile.ZipFile(io.BytesIO(r.content))
+              for n in z.namelist():
+                  if n.lower().endswith(('.jpg','.jpeg','.png','.webp')):
+                      image_bytes=z.read(n); emit('ADOBE IMAGE',n,len(image_bytes)); break
+          elif r.headers.get('content-type','').startswith('image/'):
+              image_bytes=r.content
+          if not image_bytes: raise RuntimeError('No challenge image')
+          challenge=Image.open(io.BytesIO(image_bytes)).convert('RGB')
+          challenge.save(OUT/'challenge_full.jpg',quality=96)
+          emit('CHALLENGE',challenge.size)
+
+          # Candidate pages/images for Mongolia's State Seal monument.
+          candidate_urls={
+              'mnb_proj2':'https://www.mnb.mn/uploads/assets/image/proj_2big.jpg',
+              'ikon_5160':'https://content.ikon.mn/news/2014/12/29/aea2d2_MPA_PHOTO-5160_x974.jpg',
+              'ikon_5160_small':'https://content.ikon.mn/news/2014/12/29/aea2d2_MPA_PHOTO-5160_ph.jpg',
+              'legend_1':'https://legendtour.mn/foto/m/ub/state_seal_monument_1.jpg',
+              'legend_2':'https://legendtour.mn/foto/m/ub/state_seal_monument_2.jpg',
+              'legend_3':'https://legendtour.mn/foto/m/ub/state_seal_monument_3.jpg',
+              'legend_4':'https://legendtour.mn/foto/m/ub/state_seal_monument_4.jpg',
+              'legend_5':'https://legendtour.mn/foto/m/ub/state_seal_monument_5.jpg',
+              'legend_6':'https://legendtour.mn/foto/m/ub/state_seal_monument_6.jpg',
+          }
+          page_urls={
+              'mnb':'https://www.mnb.mn/i/42233',
+              'ikon':'https://ikon.mn/n/dap',
+              'legend':'https://legendtour.mn/mongolia/regions/ub-state_seal_monument.shtml',
+              'mnb2':'https://www.mnb.mn/i/42233',
+          }
+          for pname,purl in page_urls.items():
+              try:
+                  pr=s.get(purl,timeout=60,allow_redirects=True)
+                  save('page_'+pname+'.html',pr.text)
+                  emit('PAGE',pname,pr.status_code,pr.url,len(pr.content))
+                  soup=BeautifulSoup(pr.text,'lxml')
+                  for idx,tag in enumerate(soup.select('img[src], a[href]')):
+                      u=tag.get('src') or tag.get('href') or ''
+                      u=urljoin(pr.url,u)
+                      low=u.lower()
+                      if any(k in low for k in ('seal','tamg','proj_2','5160','тамг','tur_')) and re.search(r'\.(?:jpe?g|png|webp)(?:\?|$)',low):
+                          candidate_urls[f'{pname}_auto_{idx}']=u
+                          emit('DISCOVERED CANDIDATE',pname,idx,u)
+              except Exception as e: emit('PAGE ERROR',pname,repr(e))
+
+          candidates=[]
+          for name,u in list(candidate_urls.items()):
+              try:
+                  cr=s.get(u,timeout=60,allow_redirects=True)
+                  emit('CANDIDATE GET',name,cr.status_code,cr.url,cr.headers.get('content-type'),len(cr.content))
+                  if cr.status_code==200 and cr.content[:2] in (b'\xff\xd8',b'\x89P'):
+                      im=Image.open(io.BytesIO(cr.content)).convert('RGB')
+                      ext='.jpg' if cr.content[:2]==b'\xff\xd8' else '.png'
+                      path=OUT/(name+ext); path.write_bytes(cr.content)
+                      candidates.append((name,u,im,path))
+                      emit('CANDIDATE IMAGE',name,im.size)
+              except Exception as e: emit('CANDIDATE ERROR',name,repr(e))
+
+          # Compare full/crop feature matches to candidate images.
+          def cvgray(im): return cv2.cvtColor(np.array(im),cv2.COLOR_RGB2GRAY)
+          q=cvgray(challenge)
+          sift=cv2.SIFT_create(nfeatures=5000)
+          qkp,qdes=sift.detectAndCompute(q,None)
+          emit('QUERY SIFT',len(qkp) if qkp else 0)
+          bf=cv2.BFMatcher(cv2.NORM_L2)
+          comparisons=[]
+          for name,u,im,path in candidates:
+              g=cvgray(im); kp,des=sift.detectAndCompute(g,None)
+              good=[]; inliers=0
+              if qdes is not None and des is not None and len(des)>=2:
+                  knn=bf.knnMatch(qdes,des,k=2)
+                  good=[m for m,n in knn if m.distance<0.72*n.distance]
+                  if len(good)>=4:
+                      src=np.float32([qkp[m.queryIdx].pt for m in good]).reshape(-1,1,2)
+                      dst=np.float32([kp[m.trainIdx].pt for m in good]).reshape(-1,1,2)
+                      H,mask=cv2.findHomography(src,dst,cv2.RANSAC,5.0)
+                      if mask is not None: inliers=int(mask.sum())
+              ph=int(imagehash.phash(challenge.resize((1024,192)))-imagehash.phash(im.resize((1024,192))))
+              row={'name':name,'url':u,'size':im.size,'sift_kp':len(kp) if kp else 0,'good':len(good),'inliers':inliers,'phash_dist':ph}
+              comparisons.append(row); emit('COMPARE',json.dumps(row))
+          save('comparisons.json',json.dumps(comparisons,indent=2,ensure_ascii=False))
+
+          # Contact sheet.
+          thumbs=[('challenge',challenge)]+[(n,im) for n,_,im,_ in candidates]
+          if thumbs:
+              cells=[]
+              for n,im in thumbs:
+                  t=ImageOps.contain(im,(500,260),Image.Resampling.LANCZOS)
+                  cell=Image.new('RGB',(520,310),'white'); cell.paste(t,((520-t.width)//2,35));
+                  ImageDraw.Draw(cell).text((8,8),n,fill='black')
+                  cells.append(cell)
+              cols=2; rows=(len(cells)+cols-1)//cols
+              sheet=Image.new('RGB',(cols*520,rows*310),'white')
+              for i,c in enumerate(cells): sheet.paste(c,((i%cols)*520,(i//cols)*310))
+              sheet.save(OUT/'candidate_contact_sheet.jpg',quality=92)
+
+          # Generate challenge crops, including perspective/ornament variants.
+          W,H=challenge.size
+          crop_defs={
+              'full':(0,0,W,H),
+              'left_half':(0,0,int(W*.55),H),
+              'left_symbols':(0,0,int(W*.43),int(H*.82)),
+              'center_symbols':(int(W*.18),0,int(W*.78),int(H*.82)),
+              'right_symbols':(int(W*.42),0,W,int(H*.82)),
+              'symbols_no_border':(0,0,W,int(H*.76)),
+              'bottom_ornament':(0,int(H*.62),W,H),
+              'far_left':(0,0,int(W*.28),H),
+          }
+          crops=[]
+          for n,b in crop_defs.items():
+              im=challenge.crop(b); im.save(OUT/f'crop_{n}.jpg',quality=95); crops.append((n,im))
+
+          # Selenium Yandex deep pages for full + top crops.
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          opts=Options(); opts.add_argument('--headless=new'); opts.add_argument('--no-sandbox'); opts.add_argument('--disable-dev-shm-usage'); opts.add_argument('--disable-gpu'); opts.add_argument('--window-size=1920,1080'); opts.add_argument('--lang=en-US'); opts.add_argument('--user-agent='+headers['User-Agent'])
+          driver=webdriver.Chrome(options=opts)
+          all_yandex={}
+          for ci,(cname,cim) in enumerate(crops[:6]):
+              buf=io.BytesIO(); cim.save(buf,'JPEG',quality=94); raw=buf.getvalue()
+              try:
+                  req={'blocks':[{'block':'b-page_type_search-by-image__link'}]}
+                  up=s.post('https://yandex.com/images/search',params={'rpt':'imageview','format':'json','request':json.dumps(req,separators=(',',':'))},files={'upfile':(cname+'.jpg',raw,'image/jpeg')},timeout=90)
+                  j=up.json(); p=j['blocks'][0]['params']; cbir=p['cbirId']; orig=p['originalImageUrl']
+                  emit('Y CROP',cname,'CBIR',cbir)
+                  crop_results=[]
+                  # Use imagelike pagination, first 8 pages. Exact/source site page also checked.
+                  urls=[]
+                  for page in range(0,8):
+                      urls.append(('similar_'+str(page),'https://yandex.com/images/search?'+urlencode({'cbir_id':cbir,'rpt':'imagelike','url':orig,'p':page})))
+                  urls.append(('sites','https://yandex.com/images/search?'+urlencode({'rpt':'imageview','cbir_id':cbir,'url':orig,'cbir_page':'sites'})))
+                  for label,u in urls:
+                      try:
+                          driver.get(u); time.sleep(3.5)
+                          dom=driver.page_source
+                          soup=BeautifulSoup(dom,'lxml')
+                          roots=soup.select('div.Root[data-state]')
+                          state=None
+                          for root in sorted(roots,key=lambda x:len(x.get('data-state','')),reverse=True):
+                              try:
+                                  jj=json.loads(root.get('data-state',''))
+                                  if isinstance(jj,dict) and 'initialState' in jj: state=jj['initialState']; break
+                              except Exception: pass
+                          found=[]
+                          if state:
+                              items=state.get('serpList',{}).get('items',{})
+                              ents=items.get('entities',{}) if isinstance(items,dict) else {}
+                              keys=items.get('keys',[]) if isinstance(items,dict) else []
+                              for k in keys:
+                                  x=ents.get(k,{})
+                                  sn=x.get('snippet',{}) or {}
+                                  found.append({'pos':x.get('pos'),'title':sn.get('title') or x.get('alt'),'domain':sn.get('domain'),'pageUrl':sn.get('url'),'imageUrl':x.get('origUrl'),'width':x.get('origWidth') or x.get('width'),'height':x.get('origHeight') or x.get('height')})
+                          emit('Y PAGE',cname,label,'found',len(found),'title',driver.title)
+                          for x in found[:60]: emit('Y HIT',cname,label,json.dumps(x,ensure_ascii=False))
+                          crop_results.extend(found)
+                          if ci==0 and label in ('similar_0','similar_1','sites'):
+                              save(f'y_{cname}_{label}.html',dom)
+                              driver.save_screenshot(str(OUT/f'y_{cname}_{label}.png'))
+                      except Exception as e: emit('Y PAGE ERROR',cname,label,repr(e))
+                  # de-duplicate
+                  seen=set(); unique=[]
+                  for x in crop_results:
+                      key=(x.get('pageUrl'),x.get('imageUrl'))
+                      if key not in seen: seen.add(key); unique.append(x)
+                  all_yandex[cname]={'cbir':cbir,'orig':orig,'results':unique}
+              except Exception as e: emit('Y CROP ERROR',cname,repr(e))
+          driver.quit()
+          save('yandex_results.json',json.dumps(all_yandex,indent=2,ensure_ascii=False))
+          save('results.txt','\n'.join(log)+'\n')
+          PY
+      - name: Upload investigation output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: investigate-v4
+          path: investigate-v4
+          if-no-files-found: warn
