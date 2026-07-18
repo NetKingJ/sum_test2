@@ -1,8 +1,8 @@
 {
   "google_lens": {
     "status": 200,
-    "final_url": "https://www.google.com/search?vsrid=CNCD4fK0rLygTBACGAEiJGVjNGM1MzQ0LWYzZjQtNDBmMi04ZmQyLTdhM2ZjNDk0YmUzNTKBASICZHooFkJzCi5sZmUtZHVtbXk6MWI4MDc2NjctMTNkZC00ZjE2LWE3ODUtNmI3Y2VkMGJiZDEwEkEKPy9ibnMvZHovYm9yZy9kei9ibnMvbGVucy1mcm9udGVuZC1hcGkvcHJvZC5sZW5zLWZyb250ZW5kLWFwaS82NloECgJkejiFnonf6tyVAw&vsint=CAIqDAoCCAcSAggKGAEgAToiChYNAAAAPxUAAAA_HQAAgD8lAACAPzABENgEGHElAACAPw&udm=26&lns_mode=un&source=lns.web.ccm&vsdim=600,113&gsessionid=vGu6EVqUQrvsi0fivT3fAjj7SwSkxFh1tEJ7dZXO-C0o8SGob0-xYg&lsessionid=USpjLm3m_wS4PGKA8rLNUhOXuKA6j5icoYU8uFUEqY2aM9AZqbzuJQ&lns_surface=26&lns_vfs=e&qsubts=1784398586019&hl=en",
-    "length": 91617,
+    "final_url": "https://www.google.com/search?vsrid=CPGPpbG84NfZkgEQAhgBIiRjYjY3NDA4Ni1mZWNjLTQzMWQtYjA5ZS04ZjM3YjM3MGVhYTEygQEiAm5uKARCcwoubGZlLWR1bW15OjI5YWZiZmUwLTMzYzMtNDYwYy05NThjLTY2NjAxNjhmMWIwYxJBCj8vYm5zL25uL2Jvcmcvbm4vYm5zL2xlbnMtZnJvbnRlbmQtYXBpL3Byb2QubGVucy1mcm9udGVuZC1hcGkvOTFaBAoCbm4417LdqevclQM&vsint=CAIqDAoCCAcSAggKGAEgAToiChYNAAAAPxUAAAA_HQAAgD8lAACAPzABENgEGHElAACAPw&udm=26&lns_mode=un&source=lns.web.ccm&vsdim=600,113&gsessionid=l3Ozt-crBrRE7nXQzsUkqejX3DJO36BZjfDmHlwVvcG9FHJjgjWn1Q&lsessionid=Spk5Ad7Su04tU17-hbXcW7c595ZR_pjCFphbY6wYf2m0Pkjtc1tpnw&lns_surface=26&lns_vfs=e&qsubts=1784398742835&hl=en",
+    "length": 91295,
     "urls": [],
     "title_matches": [
       "Google Search"
@@ -17,7 +17,7 @@
   "tineye": {
     "status": 403,
     "url": "https://tineye.com/api/v1/result_json/",
-    "length": 28521,
+    "length": 28543,
     "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\" />\n    <link rel=\"icon\" type=\"image/x-icon\" sizes=\"16x16\" href=\"/favicon.ico\" />\n\n    <!-- Preload fonts -->\n    <link\n      rel=\"preload\"\n      href=\"/fonts/open-sans-v40-latin-regular.woff2\"\n      as=\"font\"\n      type=\"font/woff2\"\n      crossorigin\n    />\n    <link\n      rel=\"preload\"\n      href=\"/fonts/open-sans-v40-latin-600.woff2\"\n      as=\"font\"\n      type=\"font/woff2\"\n      crossorigin\n    />\n\n    <style>/* \n  These styles are used on the error page when JavaScript is disabled in the browser and on the CloudFlare error pages.\n*/\n\n.wrapper {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n  .wrapper {\n    width: 750px;\n  }\n}\n@media (min-width: 992px) {\n  .wrapper {\n    width: 970px;\n  }\n}\n@media (min-width: 1200px) {\n  .wrapper {\n    width: 1170px;\n  }\n}\n\n.error-content {\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  padding-top: 90px;\n}\n\n@media (max-width: 768px) {\n  .error-content {\n    flex-direction: column;\n    align-items: center;\n    text-align: center;\n  }\n}\n\n.error-text {\n  display: flex;\n  flex-direction: column;\n  flex-basis: 45%;\n}\n\n.logo-link {\n  margin-bottom: 8px;\n}\n\n.error-text h2 {\n  font-family: \"Open Sans\", sans-serif;\n  font-size: 32px;\n  font-weight: 600;\n  line-height: 42px;\n  margin-bottom: 16px;\n  margin-top: 0;\n}\n\n.error-text p {\n  margin-top: 0;\n  margin-bottom: 8px;\n  font-family: \"Open Sans\", sans-serif;\n  font-size: 18px;\n  font-weight: 400;\n  line-height: 30px;\n  letter-spacing: 0.25px;\n  color: #303a46;\n}\n\n.error-text a {\n  color: #3572af;\n  text-decoration: none;\n}\n\n.error-img {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-left: 20px;\n\n  @media (max-width: 768px) {\n    margin-left: 0;\n  }\n"
   }
 }
