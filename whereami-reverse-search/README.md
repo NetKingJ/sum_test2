@@ -1,3 +1,3 @@
 Temporary OSINT reverse-image investigation branch.
 
-Capture diagnostics for multilingual candidate harvesting.
+Run exact original challenge image against multilingual visual candidates.
