@@ -1,0 +1,31 @@
+name: Window Seat Rampi Log
+
+on:
+  push:
+    branches:
+      - window-seat-osint
+    paths:
+      - '.github/workflows/window-seat-rampi.yml'
+      - 'window-seat-osint/fetch_rampi.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: window-seat-osint
+          fetch-depth: 0
+      - run: python3 window-seat-osint/fetch_rampi.py
+      - name: Commit inspection result
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add rampi-page.html rampi-inspect.txt
+          git commit -m 'Add Rampi public flight-log inspection' || exit 0
+          git push origin HEAD:window-seat-osint
