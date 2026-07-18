@@ -30,18 +30,23 @@ for pat in ['fetch more','fetch-more','load more','load-more','ajax','offset','p
 
 scripts = re.findall(r'<script[^>]+src=["\']([^"\']+)', text, re.I)
 lines.append('\nSCRIPTS\n'+json.dumps(scripts, indent=2))
-for src in scripts:
+for num, src in enumerate(scripts):
     url=urllib.parse.urljoin(BASE, html.unescape(src))
     try:
         js=get(url).decode('utf-8','replace')
     except Exception as e:
         lines.append(f'ERROR {url}: {e!r}')
         continue
-    if any(x in js.lower() for x in ['fetch more','fetch-more','loadmore','load-more','/flights']):
-        lines.append(f'\n=== JS {url} length={len(js)} ===')
-        for pat in ['fetch more','fetch-more','loadmore','load-more','/flights','offset','pagination']:
-            for m in list(re.finditer(pat,js,re.I))[:20]:
-                lines.append(js[max(0,m.start()-500):m.end()+1000])
+    outname = f'rampi-script-{num}.js'
+    if 'profile-flights' in url:
+        outname = 'rampi-profile-flights.js'
+    elif '/main.js' in url:
+        outname = 'rampi-main.js'
+    Path(outname).write_text(js, encoding='utf-8')
+    lines.append(f'\n=== JS {url} saved={outname} length={len(js)} ===')
+    for pat in ['fetch more','fetch-more','loadmore','load-more','/flights','offset','pagination','flight-list-more']:
+        for m in list(re.finditer(pat,js,re.I))[:30]:
+            lines.append(js[max(0,m.start()-800):m.end()+1600])
 
 Path('rampi-inspect.txt').write_text('\n'.join(lines), encoding='utf-8')
-print('\n'.join(lines)[:50000])
+print('\n'.join(lines)[:80000])
