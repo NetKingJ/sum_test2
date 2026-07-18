@@ -27,9 +27,9 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests beautifulsoup4 pillow opencv-python-headless numpy
-      - name: Restore exact challenge image
+      - name: Verify exact challenge image
         run: |
-          base64 -d whereami-reverse-search/whereami-original.b64 > whereami-reverse-search/whereami-small.jpg
+          cp whereami-reverse-search/whereami-original.jpg whereami-reverse-search/whereami-small.jpg
           stat -c '%s bytes' whereami-reverse-search/whereami-small.jpg
           python - <<'PY'
           from PIL import Image
