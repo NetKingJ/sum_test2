@@ -64,7 +64,6 @@ def download(index: int) -> bytes:
 
 
 def parse_chunk(index: int, data: bytes):
-    # Int32Array in tar1090 is native little-endian on browser platforms.
     n = len(data) // 16
     callsigns: dict[str, str] = {}
     positions: list[dict] = []
@@ -79,18 +78,14 @@ def parse_chunk(index: int, data: bytes):
         a_u, b_u, c_u, d_u = struct.unpack_from("<4I", data, off)
 
         if a_u == MAGIC:
-            # Exact reconstruction used by tar1090 replay parser.
             now = c_u / 1000.0 + b_u * 4294967.296
             interval = (d_u & 0xFFFF) / 1000.0
             marker_count += 1
             continue
-
         if now is None:
             continue
 
         hexid = f"{a_u & 0xFFFFFF:06x}"
-
-        # tar1090 metadata record: second int >= 2^30, callsign occupies final 8 bytes.
         if b_s >= 1073741824:
             cs = decode_callsign(data[off + 8 : off + 16])
             if cs:
@@ -103,14 +98,6 @@ def parse_chunk(index: int, data: bytes):
             malformed += 1
             continue
 
-        alt_code = signed16(a_u)
-        if alt_code == -123:
-            altitude_ft = "ground"
-        elif alt_code == -124:
-            altitude_ft = None
-        else:
-            altitude_ft = alt_code * 25
-        speed_kt = signed16(d_u >> 16) / 10.0
         dist = haversine(TARGET_LAT, TARGET_LON, lat, lon)
         positions.append(
             {
@@ -121,8 +108,7 @@ def parse_chunk(index: int, data: bytes):
                 "lat": lat,
                 "lon": lon,
                 "distance_km": dist,
-                "altitude_ft": altitude_ft,
-                "speed_kt": speed_kt,
+                "speed_kt": signed16(d_u >> 16) / 10.0,
                 "type_bits": (a_u >> 27) & 0x1F,
                 "interval_s": interval,
             }
@@ -139,7 +125,7 @@ def main() -> None:
     chunk_stats = {}
     errors = {}
 
-    # Cover 13:30 through 16:00 UTC, safely bracketing both timestamp interpretations.
+    # 13:30–16:00 UTC, bracketing both interpretations and nearby crossing times.
     for idx in range(27, 32):
         try:
             data = download(idx)
@@ -150,7 +136,6 @@ def main() -> None:
         except Exception as exc:
             errors[str(idx)] = repr(exc)
 
-    # Fill callsigns learned in an adjacent chunk.
     for p in all_positions:
         if not p["callsign"]:
             p["callsign"] = all_callsigns.get(p["hex"], "")
@@ -163,32 +148,58 @@ def main() -> None:
             if td <= 15 * 60 and p["distance_km"] <= 250:
                 q = dict(p)
                 q["time_delta_s"] = p["timestamp"] - target
-                # Prefer spatiotemporal closeness; 1 minute roughly 14 km at cruise.
                 q["score"] = p["distance_km"] + td * 0.20
                 candidates.append(q)
         candidates.sort(key=lambda x: (x["score"], x["distance_km"], abs(x["time_delta_s"])))
-
-        # Deduplicate repeated samples by aircraft, retaining best sample.
         best = {}
         for c in candidates:
             best.setdefault(c["hex"], c)
-        deduped = sorted(best.values(), key=lambda x: x["score"])[:100]
         results.append(
             {
                 "target_epoch": target,
                 "target_utc": datetime.fromtimestamp(target, timezone.utc).isoformat(),
-                "nearest_aircraft": deduped,
+                "nearest_aircraft": sorted(best.values(), key=lambda x: x["score"])[:100],
             }
         )
+
+    # Every aircraft that came within 40 km of the EXIF point in the full 2.5-hour window.
+    by_aircraft = {}
+    for p in all_positions:
+        if p["distance_km"] <= 40:
+            old = by_aircraft.get(p["hex"])
+            if old is None or p["distance_km"] < old["distance_km"]:
+                by_aircraft[p["hex"]] = p
+    point_crossings = sorted(by_aircraft.values(), key=lambda x: (x["distance_km"], x["timestamp"]))
+
+    # Identify all SWISS-operated callsigns, regardless of exact timestamp mismatch.
+    swr_by_aircraft = {}
+    for p in all_positions:
+        if p["callsign"].startswith("SWR") and p["distance_km"] <= 800:
+            old = swr_by_aircraft.get(p["hex"])
+            if old is None or p["distance_km"] < old["distance_km"]:
+                swr_by_aircraft[p["hex"]] = p
+    swr_closest = sorted(swr_by_aircraft.values(), key=lambda x: (x["distance_km"], x["timestamp"]))
+
+    # Full track samples near the point for each SWISS aircraft that came within 150 km.
+    swr_hexes = {p["hex"] for p in swr_closest if p["distance_km"] <= 150}
+    swr_tracks = {}
+    for hx in sorted(swr_hexes):
+        samples = [p for p in all_positions if p["hex"] == hx and p["distance_km"] <= 250]
+        samples.sort(key=lambda x: x["timestamp"])
+        # Keep 30-second samples to keep output compact.
+        swr_tracks[hx] = [p for i, p in enumerate(samples) if i == 0 or p["timestamp"] - samples[i-1]["timestamp"] >= 30]
 
     payload = {
         "target": {"lat": TARGET_LAT, "lon": TARGET_LON},
         "chunk_stats": chunk_stats,
         "errors": errors,
         "results": results,
+        "point_crossings_within_40km": point_crossings,
+        "swr_closest_13_30_to_16_00_utc": swr_closest,
+        "swr_tracks_near_point": swr_tracks,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(OUT.read_text(encoding="utf-8")[:30000])
+    print(OUT.read_text(encoding="utf-8")[:50000])
 
 
 if __name__ == "__main__":
