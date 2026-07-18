@@ -1,3 +1,3 @@
 Temporary OSINT reverse-image investigation branch.
 
-Create a ranked contact sheet from Yandex visual matches.
+Check original and archived Tour Mongolia Rashaan wall photographs against the challenge image.
