@@ -17,7 +17,7 @@ permissions:
 jobs:
   reverse:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,11 +29,12 @@ jobs:
       - run: pip install requests beautifulsoup4
       - run: python whereami-reverse-search/reverse.py
       - run: python whereami-reverse-search/lens_render.py
+      - run: python whereami-reverse-search/other_engines.py
       - name: Commit results to branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          rm -rf whereami-reverse-search/chrome-profile-* || true
+          rm -rf whereami-reverse-search/chrome-profile-* whereami-reverse-search/other-profile-* || true
           git add -A whereami-reverse-search
-          git commit -m 'Update rendered reverse image search results' || exit 0
+          git commit -m 'Update all reverse image search results' || exit 0
           git push origin HEAD:whereami-reverse-search
