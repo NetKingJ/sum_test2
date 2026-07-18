@@ -1,0 +1,23 @@
+{
+  "status": 200,
+  "headers": {
+    "Date": "Sat, 18 Jul 2026 17:08:56 GMT",
+    "Content-Type": "text/html; charset=UTF-8",
+    "Transfer-Encoding": "chunked",
+    "Connection": "close",
+    "Set-Cookie": "PHPSESSID=7hlom2rm94ldls9laq58rcq2e7; path=/",
+    "Server": "cloudflare",
+    "x-powered-by": "PHP/5.6.30",
+    "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+    "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+    "pragma": "no-cache",
+    "cf-cache-status": "DYNAMIC",
+    "CF-RAY": "a1d31756fbe5a1c1-MSP",
+    "alt-svc": "h3=\":443\"; ma=86400"
+  },
+  "cookies": [
+    "<Cookie AWSALB=/aQ/YjWtBuhpgOo6yzLRclZZLSpsIG66ZSjqZ2H66F/dQkL/vxKXDLeYdif7O9zspNWLS5dHo2IUNfmIEyq9ImIiCPEffv2YDv/4P7b2QVuVQbaGjwdctz4uC1bs for my.flightradar24.com/>",
+    "<Cookie AWSALBCORS=/aQ/YjWtBuhpgOo6yzLRclZZLSpsIG66ZSjqZ2H66F/dQkL/vxKXDLeYdif7O9zspNWLS5dHo2IUNfmIEyq9ImIiCPEffv2YDv/4P7b2QVuVQbaGjwdctz4uC1bs for my.flightradar24.com/>",
+    "<Cookie PHPSESSID=7hlom2rm94ldls9laq58rcq2e7 for my.flightradar24.com/>"
+  ]
+}
