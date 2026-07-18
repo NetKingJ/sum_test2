@@ -1,0 +1,142 @@
+name: whereami-reverse-v3
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-resolution-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet requests beautifulsoup4 lxml pillow selenium
+      - name: Download full-resolution Acrobat rendition and reverse-search it
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reverse-v3
+          python - <<'PY'
+          import html as htmlmod
+          import io, json, re, time, zipfile
+          from pathlib import Path
+          from urllib.parse import urlencode, urljoin, urlparse
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image, ImageChops
+
+          OUT=Path('reverse-v3'); log=[]
+          def emit(*x):
+              s=' '.join(map(str,x)); print(s,flush=True); log.append(s)
+          def save(name,data,binary=False):
+              p=OUT/name
+              if binary: p.write_bytes(data)
+              else: p.write_text(data,encoding='utf-8',errors='replace')
+              return p
+          headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36','Accept-Language':'en-US,en;q=0.9,ru;q=0.8'}
+          s=requests.Session(); s.headers.update(headers)
+
+          zip_url='https://to.adobe.com/eJIDMSLqUkpKwC5ftTM47dOwrNcK'
+          r=s.get(zip_url,timeout=90,allow_redirects=True)
+          emit('ADOBE',r.status_code,r.url,r.headers.get('content-type'),'len',len(r.content), 'sig',r.content[:12])
+          save('adobe-download.bin',r.content,True)
+          image_bytes=None
+          if r.content[:2]==b'PK':
+              z=zipfile.ZipFile(io.BytesIO(r.content))
+              emit('ZIP NAMES',z.namelist())
+              for name in z.namelist():
+                  b=z.read(name)
+                  if name.lower().endswith(('.jpg','.jpeg','.png','.webp')):
+                      image_bytes=b; emit('SELECTED',name,len(b)); break
+          elif r.headers.get('content-type','').startswith('image/'):
+              image_bytes=r.content
+          if image_bytes is None:
+              raise RuntimeError('Could not obtain image from Adobe rendition')
+          save('input-full.bin',image_bytes,True)
+          im=Image.open(io.BytesIO(image_bytes)).convert('RGB')
+          emit('FULL IMAGE',im.size,im.format)
+          # Remove broad white PDF margins, if any.
+          bg=Image.new('RGB',im.size,(255,255,255)); diff=ImageChops.difference(im,bg)
+          bbox=diff.getbbox()
+          if bbox:
+              emit('NONWHITE BBOX',bbox)
+              if (bbox[2]-bbox[0])>100 and (bbox[3]-bbox[1])>30 and (bbox[2]-bbox[0])<im.width*0.98:
+                  im=im.crop(bbox); emit('CROPPED',im.size)
+          img_path=OUT/'input-full.jpg'; im.save(img_path,'JPEG',quality=95,optimize=True)
+          raw=img_path.read_bytes(); dims=im.size
+          emit('SEARCH IMAGE',len(raw),dims)
+
+          def inspect(label, rr):
+              save(label.lower()+'.html',rr.text)
+              soup=BeautifulSoup(rr.text,'lxml')
+              emit(label,'STATUS',rr.status_code,'URL',rr.url,'LEN',len(rr.content),'TITLE',soup.title.get_text(' ',strip=True) if soup.title else '')
+              text=' '.join(soup.get_text(' ',strip=True).split())
+              emit(label,'VISIBLE',text[:30000])
+              for a in soup.select('a[href]')[:2000]:
+                  href=urljoin(rr.url,a.get('href','')); tx=' '.join(a.get_text(' ',strip=True).split())
+                  host=urlparse(href).netloc
+                  if href.startswith('http') and host and not any(x in host for x in ('yandex.','ya.ru','yastatic.net','google.','gstatic.com','googleusercontent.com')):
+                      emit(label,'EXTERNAL',tx[:400],href[:1800])
+              for tag in soup.select('[data-bem]')[:1500]:
+                  d=htmlmod.unescape(tag.get('data-bem',''))
+                  if any(k in d.lower() for k in ('serp-item','snippet','cbir','similar','source')):
+                      emit(label,'DATA-BEM',d[:10000])
+              return soup
+
+          # Yandex upload and result variants.
+          req={'blocks':[{'block':'b-page_type_search-by-image__link'}]}
+          up=s.post('https://yandex.com/images/search',params={'rpt':'imageview','format':'json','request':json.dumps(req,separators=(',',':'))},files={'upfile':('whereami.jpg',raw,'image/jpeg')},timeout=90)
+          save('yandex-upload.json',up.text); emit('YUPLOAD',up.status_code,len(up.content))
+          j=up.json(); p=j['blocks'][0]['params']; cbir=p['cbirId']; orig=p['originalImageUrl']; emit('CBIR',cbir); emit('ORIG',orig)
+          variants=[
+              {'rpt':'imageview','cbir_id':cbir,'url':orig},
+              {'rpt':'imageview','cbir_id':cbir,'url':orig,'cbir_page':'similar'},
+              {'rpt':'imageview','cbir_id':cbir,'url':orig,'cbir_page':'sites'},
+              {'rpt':'imageview','cbir_id':cbir,'url':orig,'from':'tabbar','lr':'84'},
+          ]
+          yurls=[]
+          for i,q in enumerate(variants):
+              u='https://yandex.com/images/search?'+urlencode(q); yurls.append(u)
+              rr=s.get(u,timeout=90,allow_redirects=True); inspect('YANDEX'+str(i),rr)
+
+          # Google Lens upload; request and browser rendering.
+          g=s.post('https://lens.google.com/v3/upload',params={'hl':'en','ep':'ccm','stcs':str(int(time.time()*1000))},data={'processed_image_dimensions':f'{dims[0]},{dims[1]}'},files={'encoded_image':('whereami.jpg',raw,'image/jpeg')},timeout=90,allow_redirects=False)
+          gloc=urljoin(g.url,g.headers.get('location','')) if g.headers.get('location') else ''
+          emit('GOOGLE LOCATION',gloc); save('urls.json',json.dumps({'yandex':yurls,'google':gloc,'cbir':cbir,'orig':orig},indent=2))
+
+          try:
+              from selenium import webdriver
+              from selenium.webdriver.chrome.options import Options
+              opts=Options(); opts.add_argument('--headless=new'); opts.add_argument('--no-sandbox'); opts.add_argument('--disable-dev-shm-usage'); opts.add_argument('--disable-gpu'); opts.add_argument('--window-size=1920,1080'); opts.add_argument('--lang=en-US'); opts.add_argument('--user-agent='+headers['User-Agent'])
+              driver=webdriver.Chrome(options=opts)
+              for label,u in [('GOOGLE_BROWSER',gloc),('YANDEX_BROWSER',yurls[0]),('YANDEX_SIMILAR_BROWSER',yurls[1]),('YANDEX_SITES_BROWSER',yurls[2])]:
+                  if not u: continue
+                  try:
+                      driver.get(u); time.sleep(15)
+                      dom=driver.page_source; save(label.lower()+'.html',dom)
+                      body=' '.join(driver.find_element('tag name','body').text.split())
+                      emit(label,'FINAL',driver.current_url,'TITLE',driver.title,'DOM',len(dom)); emit(label,'TEXT',body[:40000])
+                      for a in driver.find_elements('css selector','a[href]')[:2500]:
+                          href=a.get_attribute('href') or ''; tx=' '.join((a.text or '').split()); host=urlparse(href).netloc
+                          if href.startswith('http') and host and not any(x in host for x in ('yandex.','ya.ru','yastatic.net','google.','gstatic.com','googleusercontent.com')):
+                              emit(label,'EXTERNAL',tx[:400],href[:1800])
+                      driver.save_screenshot(str(OUT/(label.lower()+'.png')))
+                  except Exception as e: emit(label,'ERROR',repr(e))
+              driver.quit()
+          except Exception as e: emit('SELENIUM ERROR',repr(e))
+          save('results.txt','\n'.join(log)+'\n')
+          PY
+      - name: Upload full-resolution reverse-search output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reverse-v3
+          path: reverse-v3
+          if-no-files-found: warn
