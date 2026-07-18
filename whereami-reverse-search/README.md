@@ -1,3 +1,3 @@
 Temporary OSINT reverse-image investigation branch.
 
-Retry after result-staging fix.
+Run headless Google Lens visual and exact-match tabs.
