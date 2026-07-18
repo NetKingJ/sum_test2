@@ -1,0 +1,43 @@
+[
+  {
+    "url": "https://tourmongolia.com/file/2018/03/Rashaan-khad-ancestors-wall-Tour-Mongolia-4.jpg",
+    "direct": {
+      "status": 404,
+      "length": 91959,
+      "final_url": "https://tourmongolia.com/file/2018/03/Rashaan-khad-ancestors-wall-Tour-Mongolia-4.jpg",
+      "content_type": "text/html; charset=UTF-8",
+      "decode": false
+    },
+    "archives": [],
+    "cdx_status": 200,
+    "cdx_preview": "[]\n"
+  },
+  {
+    "url": "https://tourmongolia.com/file/2018/03/Rashaan-khad-ancestors-wall-Tour-Mongolia-2.jpg",
+    "direct": {
+      "status": 404,
+      "length": 91959,
+      "final_url": "https://tourmongolia.com/file/2018/03/Rashaan-khad-ancestors-wall-Tour-Mongolia-2.jpg",
+      "content_type": "text/html; charset=UTF-8",
+      "decode": false
+    },
+    "archives": [],
+    "cdx_status": 200,
+    "cdx_preview": "[]\n"
+  },
+  {
+    "url": "https://lh3.googleusercontent.com/ci/AL18g_SE0QFha9ZyjgfJyB5VHpB-5E8dz-8pX0pOMhWLAk2yIhUh543oXQMrh9NUL1whyCpDeLr_umY",
+    "direct": {
+      "status": 200,
+      "length": 52019,
+      "final_url": "https://lh3.googleusercontent.com/ci/AL18g_SE0QFha9ZyjgfJyB5VHpB-5E8dz-8pX0pOMhWLAk2yIhUh543oXQMrh9NUL1whyCpDeLr_umY",
+      "content_type": "image/png",
+      "decode": true,
+      "width": 462,
+      "height": 463,
+      "sift_good": 0,
+      "inliers": 0
+    },
+    "archives": []
+  }
+]

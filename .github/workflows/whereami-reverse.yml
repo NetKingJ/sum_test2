@@ -1,0 +1,35 @@
+name: Whereami Reverse Search
+
+on:
+  push:
+    branches:
+      - whereami-reverse-search
+    paths:
+      - '.github/workflows/whereami-reverse.yml'
+      - 'whereami-reverse-search/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reverse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: whereami-reverse-search
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: python whereami-reverse-search/reverse.py
+      - name: Commit results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add whereami-reverse-search/reverse-results.json whereami-reverse-search/google-lens.html whereami-reverse-search/yandex.html whereami-reverse-search/whereami-small.jpg || true
+          git commit -m 'Update reverse image search results' || exit 0
+          git push origin HEAD:whereami-reverse-search
