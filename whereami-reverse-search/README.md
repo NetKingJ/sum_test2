@@ -1,3 +1,3 @@
 Temporary OSINT reverse-image investigation branch.
 
-Run Bing, Yandex, TinEye, Sogou, and Google Lens comparisons.
+Generate compact keyword and domain summary from all engines.
