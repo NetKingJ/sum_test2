@@ -1,0 +1,169 @@
+name: whereami-map-v5
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  coordinate-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet requests beautifulsoup4 lxml pillow selenium
+      - name: Query maps and render geospatial evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p map-v5
+          python - <<'PY'
+          import io, json, math, re, time
+          from pathlib import Path
+          from urllib.parse import quote, urlencode, urljoin, urlparse
+          import requests
+          from bs4 import BeautifulSoup
+          from PIL import Image, ImageDraw, ImageFont
+
+          OUT=Path('map-v5'); log=[]
+          def emit(*x):
+              s=' '.join(map(str,x)); print(s,flush=True); log.append(s)
+          def save(name,data,binary=False):
+              p=OUT/name
+              if binary: p.write_bytes(data)
+              else: p.write_text(data,encoding='utf-8',errors='replace')
+              return p
+          headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36','Accept-Language':'en-US,en;q=0.9,mn;q=0.9,ru;q=0.8'}
+          s=requests.Session(); s.headers.update(headers)
+
+          # Nominatim exact-name and landmark searches.
+          terms=['State Seal Monument Ulaanbaatar','State Seal settled monument Ulaanbaatar','Mongolian State Seal Monument','Төрийн тамганы хөшөө','Монгол төрийн тамганы хөшөө','Government Palace Ulaanbaatar','Төрийн ордон Улаанбаатар']
+          nom=[]
+          for q in terms:
+              try:
+                  u='https://nominatim.openstreetmap.org/search?'+urlencode({'format':'jsonv2','limit':20,'addressdetails':1,'extratags':1,'namedetails':1,'q':q})
+                  r=s.get(u,timeout=60); emit('NOMINATIM',q,r.status_code,len(r.content)); save('nominatim_'+str(len(nom))+'.json',r.text)
+                  try:
+                      j=r.json(); nom.append({'q':q,'results':j})
+                      for x in j: emit('NOM HIT',q,x.get('display_name'),x.get('lat'),x.get('lon'),x.get('type'),x.get('osm_type'),x.get('osm_id'))
+                  except Exception as e: emit('NOM JSON ERROR',q,repr(e))
+              except Exception as e: emit('NOM ERROR',q,repr(e))
+              time.sleep(1.2)
+          save('nominatim_all.json',json.dumps(nom,ensure_ascii=False,indent=2))
+
+          # Overpass: all named/historic/tourism objects around the Government Palace.
+          queries={
+            'monuments':'''[out:json][timeout:90];(nwr(around:2500,47.9205,106.9170)[historic];nwr(around:2500,47.9205,106.9170)[memorial];nwr(around:2500,47.9205,106.9170)[tourism];nwr(around:2500,47.9205,106.9170)[name];);out center tags geom;''',
+            'palace_bbox':'''[out:json][timeout:90];(nwr(47.916,106.911,47.927,106.924););out center tags geom;'''
+          }
+          for name,q in queries.items():
+              try:
+                  r=s.post('https://overpass-api.de/api/interpreter',data={'data':q},timeout=120)
+                  emit('OVERPASS',name,r.status_code,len(r.content)); save('overpass_'+name+'.json',r.text)
+                  j=r.json();
+                  for el in j.get('elements',[]):
+                      tags=el.get('tags',{}); nm=tags.get('name') or tags.get('name:en') or tags.get('name:mn')
+                      if nm or tags.get('historic') or tags.get('memorial') or tags.get('tourism'):
+                          lat=el.get('lat') or el.get('center',{}).get('lat'); lon=el.get('lon') or el.get('center',{}).get('lon')
+                          if nm and any(k in nm.lower() for k in ('seal','tamg','тамг','palace','government','төрийн','parliament','state','square','sukh','сүх')) or tags.get('historic') or tags.get('memorial'):
+                              emit('OSM HIT',el.get('type'),el.get('id'),lat,lon,json.dumps(tags,ensure_ascii=False))
+              except Exception as e: emit('OVERPASS ERROR',name,repr(e))
+
+          # ArcGIS high resolution imagery and topo/street exports.
+          bbox=(106.9125,47.9165,106.9225,47.9265)
+          for service,fmt in [('World_Imagery','jpg'),('World_Street_Map','png32'),('World_Topo_Map','png32')]:
+              try:
+                  u=f'https://server.arcgisonline.com/ArcGIS/rest/services/{service}/MapServer/export?'+urlencode({'bbox':','.join(map(str,bbox)),'bboxSR':4326,'imageSR':4326,'size':'2400,2400','format':fmt,'f':'image','transparent':'false'})
+                  r=s.get(u,timeout=120); emit('ARCGIS',service,r.status_code,r.headers.get('content-type'),len(r.content),r.url)
+                  ext='jpg' if 'jpeg' in r.headers.get('content-type','') or fmt=='jpg' else 'png'
+                  save(service+'.'+ext,r.content,True)
+              except Exception as e: emit('ARCGIS ERROR',service,repr(e))
+
+          # OSM and Esri XYZ mosaics around candidate area at zooms 18-20.
+          def tile_xy(lat,lon,z):
+              n=2**z
+              x=(lon+180)/360*n
+              y=(1-math.asinh(math.tan(math.radians(lat)))/math.pi)/2*n
+              return x,y
+          def tile_lon(x,z): return x/(2**z)*360-180
+          def tile_lat(y,z): return math.degrees(math.atan(math.sinh(math.pi*(1-2*y/(2**z)))))
+          def mosaic(provider,z,center_lat=47.9218,center_lon=106.9170,span=5):
+              xf,yf=tile_xy(center_lat,center_lon,z); cx,cy=int(xf),int(yf); half=span//2
+              canvas=Image.new('RGB',(256*span,256*span),'white')
+              for iy,y in enumerate(range(cy-half,cy+half+1)):
+                  for ix,x in enumerate(range(cx-half,cx+half+1)):
+                      if provider=='osm': u=f'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+                      else: u=f'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg'
+                      try:
+                          r=s.get(u,timeout=45)
+                          im=Image.open(io.BytesIO(r.content)).convert('RGB')
+                          canvas.paste(im,(ix*256,iy*256))
+                      except Exception as e: emit('TILE ERROR',provider,z,x,y,repr(e))
+              # Grid and coordinate labels at tile edges; center cross.
+              d=ImageDraw.Draw(canvas)
+              d.line((canvas.width//2,0,canvas.width//2,canvas.height),fill='red',width=2)
+              d.line((0,canvas.height//2,canvas.width,canvas.height//2),fill='red',width=2)
+              west=tile_lon(cx-half,z); east=tile_lon(cx+half+1,z); north=tile_lat(cy-half,z); south=tile_lat(cy+half+1,z)
+              d.rectangle((0,0,canvas.width-1,canvas.height-1),outline='red',width=2)
+              d.text((10,10),f'{provider} z{z} bbox W{west:.6f} E{east:.6f} N{north:.6f} S{south:.6f}',fill='red')
+              name=f'{provider}_z{z}_mosaic.jpg'; canvas.save(OUT/name,quality=95)
+              save(f'{provider}_z{z}_bbox.json',json.dumps({'west':west,'east':east,'north':north,'south':south,'cx':cx,'cy':cy,'z':z},indent=2))
+              emit('MOSAIC',name,west,east,north,south)
+          for z in (18,19,20):
+              mosaic('esri',z,span=5)
+          for z in (18,19):
+              mosaic('osm',z,span=5)
+
+          # Wikimedia geosearch for nearby geotagged photos/pages.
+          for project in ('commons.wikimedia.org','en.wikipedia.org','mn.wikipedia.org'):
+              try:
+                  u=f'https://{project}/w/api.php?'+urlencode({'action':'query','format':'json','generator':'geosearch','ggsprimary':'all','ggsnamespace':6 if project.startswith('commons') else 0,'ggsradius':2000,'ggslimit':500,'ggscoord':'47.9218|106.9170','prop':'coordinates|pageimages|info','inprop':'url','piprop':'thumbnail','pithumbsize':500})
+                  r=s.get(u,timeout=90); emit('WIKIGEO',project,r.status_code,len(r.content)); save('wikigeo_'+project.replace('.','_')+'.json',r.text)
+                  j=r.json();
+                  for p in j.get('query',{}).get('pages',{}).values():
+                      title=p.get('title',''); coords=p.get('coordinates',[{}])[0]
+                      if any(k in title.lower() for k in ('seal','palace','parliament','government','sukhbaatar','state','тамг','төрийн')):
+                          emit('WIKI HIT',project,title,coords.get('lat'),coords.get('lon'),p.get('fullurl'))
+              except Exception as e: emit('WIKIGEO ERROR',project,repr(e))
+
+          # Search-engine map URLs in headless Chrome, exposing final coordinates when available.
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          opts=Options(); opts.add_argument('--headless=new'); opts.add_argument('--no-sandbox'); opts.add_argument('--disable-dev-shm-usage'); opts.add_argument('--disable-gpu'); opts.add_argument('--window-size=1920,1080'); opts.add_argument('--lang=en-US'); opts.add_argument('--user-agent='+headers['User-Agent'])
+          driver=webdriver.Chrome(options=opts)
+          map_searches=[]
+          for q in ('State Seal Monument Ulaanbaatar','Mongolian State Seal Monument','Төрийн тамганы хөшөө','Монгол төрийн тамганы хөшөө'):
+              map_searches += [
+                ('google_'+str(len(map_searches)),f'https://www.google.com/maps/search/{quote(q)}'),
+                ('yandex_'+str(len(map_searches)),f'https://yandex.com/maps/?text={quote(q)}'),
+                ('bing_'+str(len(map_searches)),f'https://www.bing.com/maps?q={quote(q)}'),
+              ]
+          for label,u in map_searches:
+              try:
+                  driver.get(u); time.sleep(8)
+                  dom=driver.page_source; body=' '.join(driver.find_element('tag name','body').text.split())
+                  emit('MAP BROWSER',label,'FINAL',driver.current_url,'TITLE',driver.title,'BODY',body[:5000])
+                  save(label+'.html',dom); driver.save_screenshot(str(OUT/(label+'.png')))
+                  # Pull coordinate-like numbers around known Mongolia range.
+                  vals=[]
+                  for pat in (r'@(-?\d+\.\d+),(-?\d+\.\d+)',r'!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)',r'center=([0-9.]+)%2C([0-9.]+)',r'"latitude"\s*:\s*(-?\d+\.\d+).*?"longitude"\s*:\s*(-?\d+\.\d+)'):
+                      for m in re.findall(pat,driver.current_url+'\n'+dom,re.S):
+                          vals.append(m)
+                  emit('MAP COORD CANDIDATES',label,vals[:100])
+              except Exception as e: emit('MAP ERROR',label,repr(e))
+          driver.quit()
+          save('results.txt','\n'.join(log)+'\n')
+          PY
+      - name: Upload map evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: map-v5
+          path: map-v5
+          if-no-files-found: warn
