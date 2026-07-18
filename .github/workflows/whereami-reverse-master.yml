@@ -27,16 +27,18 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests beautifulsoup4 pillow opencv-python-headless numpy
-      - run: python whereami-reverse-search/reverse.py
-      - run: python whereami-reverse-search/lens_render.py
-      - run: python whereami-reverse-search/other_engines.py
-      - run: python whereami-reverse-search/compact_summary.py
-      - run: python whereami-reverse-search/harvest_compare.py
-      - name: Commit results to branch
+      - name: Harvest candidates and capture diagnostics
+        run: |
+          set +e
+          python whereami-reverse-search/harvest_compare.py > whereami-reverse-search/harvest-run.log 2>&1
+          code=$?
+          echo "$code" > whereami-reverse-search/harvest-exit-code.txt
+          cat whereami-reverse-search/harvest-run.log
+          exit 0
+      - name: Commit diagnostics and results
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          rm -rf whereami-reverse-search/chrome-profile-* whereami-reverse-search/other-profile-* || true
           git add -A whereami-reverse-search
-          git commit -m 'Update harvested visual candidate matches' || exit 0
+          git commit -m 'Capture harvested candidate diagnostics' || exit 0
           git push origin HEAD:whereami-reverse-search
