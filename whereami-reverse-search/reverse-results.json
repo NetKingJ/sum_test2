@@ -1,8 +1,8 @@
 {
   "google_lens": {
     "status": 200,
-    "final_url": "https://www.google.com/search?vsrid=COaWpeuOzPiAqwEQAhgBIiQzMzg1OGJkMS02ZmMwLTQ1M2UtOThkNS0zYWQ1NjllZWFjYzUygQEiAmJpKA1CcwoubGZlLWR1bW15OjE2M2M4NTZlLTJjNDItNDJlNi04NThhLTk2YTJjZmUwMmQ1MRJBCj8vYm5zL2JpL2JvcmcvYmkvYm5zL2xlbnMtZnJvbnRlbmQtYXBpL3Byb2QubGVucy1mcm9udGVuZC1hcGkvNDdaBAoCYmk4nfK7gerclQM&vsint=CAIqDAoCCAcSAggKGAEgAToiChYNAAAAPxUAAAA_HQAAgD8lAACAPzABENgEGHElAACAPw&udm=26&lns_mode=un&source=lns.web.ccm&vsdim=600,113&gsessionid=K18k2Eq8AYcfcpzj6m46kDNyZ-2ezg_Y2wcJdeSjGV2NFO82Vbfdpw&lsessionid=EUJKhni5KNnw_r-wq-vhLWqy_OBGoMOzTZu3AYwfXlCZzWjpyuU0MA&lns_surface=26&lns_vfs=e&qsubts=1784398389704&hl=en",
-    "length": 91849,
+    "final_url": "https://www.google.com/search?vsrid=CMeF8YKX07qOtgEQAhgBIiRlYTM2NTEzZi1lY2EyLTQyY2ItOTY4MC0yM2JiOTQ3ZmE2NmQygQEiAnJ3KA1CcwoubGZlLWR1bW15Ojc3ZGMwYWNiLTU1MDItNDFhNi1hZjYwLTBiNGMzNGQ2OGJkZBJBCj8vYm5zL3J3L2JvcmcvcncvYm5zL2xlbnMtZnJvbnRlbmQtYXBpL3Byb2QubGVucy1mcm9udGVuZC1hcGkvMTJaBAoCcnc45svGkOrclQM&vsint=CAIqDAoCCAcSAggKGAEgAToiChYNAAAAPxUAAAA_HQAAgD8lAACAPzABENgEGHElAACAPw&udm=26&lns_mode=un&source=lns.web.ccm&vsdim=600,113&gsessionid=mUrpaPCfgdldHJBdlWP5T29bWryCujr73IzFVWRBfksrmaaO65SOvQ&lsessionid=GFYrWXTFobJuJU1BIP5LA26T23rcJDICFEuxziudwiTWCZcoPdVAgA&lns_surface=26&lns_vfs=e&qsubts=1784398421428&hl=en",
+    "length": 91746,
     "urls": [],
     "title_matches": [
       "Google Search"
