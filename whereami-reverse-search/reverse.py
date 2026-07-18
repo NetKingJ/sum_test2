@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import base64
 import html
 import json
 import re
@@ -12,21 +11,22 @@ from pathlib import Path
 import requests
 
 ROOT = Path(__file__).resolve().parent
+EXACT_IMAGE = ROOT / "whereami-original.jpg"
 IMAGE = ROOT / "whereami-small.jpg"
-B64 = ROOT / "whereami-small.b64"
 OUT = ROOT / "reverse-results.json"
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
-IMAGE.write_bytes(base64.b64decode(B64.read_text().strip()))
+# Always use the exact binary supplied with the challenge.
+if EXACT_IMAGE.exists():
+    IMAGE.write_bytes(EXACT_IMAGE.read_bytes())
+if not IMAGE.exists():
+    raise FileNotFoundError(IMAGE)
 
 
 def extract_urls(text: str) -> list[str]:
     text = html.unescape(text).replace("\\u003d", "=").replace("\\u0026", "&").replace("\\/", "/")
     found: list[str] = []
-    patterns = [
-        r'https?://[^"\'<>\\ ]+',
-        r'url=([^&"\'<> ]+)',
-    ]
+    patterns = [r'https?://[^"\'<>\\ ]+', r'url=([^&"\'<> ]+)']
     for pat in patterns:
         for val in re.findall(pat, text):
             try:
@@ -50,7 +50,7 @@ def useful(url: str) -> bool:
 
 session = requests.Session()
 session.headers.update({'User-Agent': UA, 'Accept-Language': 'en-US,en;q=0.9'})
-results: dict[str, object] = {}
+results: dict[str, object] = {'image_bytes': IMAGE.stat().st_size}
 
 # Google Lens multipart upload.
 try:
@@ -58,18 +58,19 @@ try:
         r = session.post(
             f'https://lens.google.com/v3/upload?ep=ccm&s=&st={int(time.time()*1000)}&hl=en',
             files={'encoded_image': ('whereami.jpg', f, 'image/jpeg')},
-            data={'processed_image_dimensions': '600,113'},
+            data={'processed_image_dimensions': '1048,197'},
             allow_redirects=True,
             timeout=90,
         )
-    (ROOT / 'google-lens.html').write_text(r.text, encoding='utf-8', errors='replace')
+    (ROOT / 'google-lens-exact.html').write_text(r.text, encoding='utf-8', errors='replace')
     urls = [u for u in extract_urls(r.text) if useful(u)]
     results['google_lens'] = {
         'status': r.status_code,
         'final_url': r.url,
         'length': len(r.content),
-        'urls': urls[:300],
-        'title_matches': re.findall(r'<title[^>]*>(.*?)</title>', r.text, flags=re.I|re.S)[:5],
+        'urls': urls[:500],
+        'title_matches': re.findall(r'<title[^>]*>(.*?)</title>', r.text, flags=re.I|re.S)[:10],
+        'text_hits': [x for x in ['Mongol','Kazakh','Kyrgyz','Turkmen','Uzbek','tamga','petroglyph','Rashaan','Tamgaly','Khuduu','Shambhala'] if x.lower() in r.text.lower()],
     }
 except Exception as exc:
     results['google_lens'] = {'error': repr(exc)}
@@ -89,22 +90,28 @@ try:
             headers={'Referer': 'https://yandex.com/images/'},
             timeout=90,
         )
-    entry: dict[str, object] = {'upload_status': up.status_code, 'upload_length': len(up.content), 'upload_preview': up.text[:1000]}
+    entry: dict[str, object] = {'upload_status': up.status_code, 'upload_length': len(up.content), 'upload_preview': up.text[:3000]}
     try:
         obj = up.json()
         query = obj['blocks'][0]['params']['url']
         result_url = 'https://yandex.com/images/search?' + query
         rr = session.get(result_url, headers={'Referer': 'https://yandex.com/images/'}, timeout=90)
-        (ROOT / 'yandex.html').write_text(rr.text, encoding='utf-8', errors='replace')
+        (ROOT / 'yandex-exact.html').write_text(rr.text, encoding='utf-8', errors='replace')
         urls = [u for u in extract_urls(rr.text) if useful(u)]
-        entry.update({'result_url': result_url, 'result_status': rr.status_code, 'result_length': len(rr.content), 'urls': urls[:300]})
+        entry.update({
+            'result_url': result_url,
+            'result_status': rr.status_code,
+            'result_length': len(rr.content),
+            'urls': urls[:500],
+            'text_hits': [x for x in ['Mongol','Kazakh','Kyrgyz','Turkmen','Uzbek','tamga','petroglyph','Rashaan','Tamgaly','Khuduu','Shambhala'] if x.lower() in rr.text.lower()],
+        })
     except Exception as exc:
         entry['parse_error'] = repr(exc)
     results['yandex'] = entry
 except Exception as exc:
     results['yandex'] = {'error': repr(exc)}
 
-# TinEye upload, useful mainly for redirect/result URL.
+# TinEye upload.
 try:
     with IMAGE.open('rb') as f:
         tr = session.post(
@@ -113,7 +120,7 @@ try:
             timeout=90,
             allow_redirects=True,
         )
-    results['tineye'] = {'status': tr.status_code, 'url': tr.url, 'length': len(tr.content), 'preview': tr.text[:2000]}
+    results['tineye'] = {'status': tr.status_code, 'url': tr.url, 'length': len(tr.content), 'preview': tr.text[:3000]}
 except Exception as exc:
     results['tineye'] = {'error': repr(exc)}
 
