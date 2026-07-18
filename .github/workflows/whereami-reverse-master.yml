@@ -1,12 +1,14 @@
 name: Temporary Whereami Reverse Search
 
-# Triggered again for the current OSINT investigation.
 on:
   push:
     branches:
       - master
     paths:
       - '.github/workflows/whereami-reverse-master.yml'
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
 
 permissions:
