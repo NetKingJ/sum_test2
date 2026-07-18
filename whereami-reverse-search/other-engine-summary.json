@@ -1,0 +1,1352 @@
+{
+  "chrome": "/usr/bin/google-chrome",
+  "image": "https://raw.githubusercontent.com/NetKingJ/sum_test2/whereami-reverse-search/whereami-reverse-search/whereami-small.jpg",
+  "targets": {
+    "bing": "https://www.bing.com/images/searchbyimage?cbir=sbi&iss=sbi&imgurl=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg&cc=us&setlang=en",
+    "bing_edges": "https://edgeservices.bing.com/images/searchbyimage?cbir=sbi&iss=sbi&imgurl=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg&cc=us&setlang=en",
+    "yandex": "https://yandex.com/images/search?rpt=imageview&url=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg&lang=en",
+    "tineye": "https://tineye.com/search?url=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg",
+    "sogou": "https://pic.sogou.com/ris?query=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg&flag=1&drag=0"
+  },
+  "results": {
+    "bing": {
+      "title": "Bing Images",
+      "links": [
+        {
+          "url": "https://aminoapps.com/c/mermaid-amino/page/blog/the-3-tails/G5DJ_jxeHnuz8JYWeL6vK6zG4VZRojP0nng",
+          "text": "aminoapps.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.reddit.com/r/DeathBattleMatchups/comments/193kmep/aang_vs_paul_atreides_avatar_vs_dune_a_balanced/",
+          "text": "reddit.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.behance.net/gallery/41301279/KINTSUGI",
+          "text": "behance.net",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.reddit.com/r/oddlysatisfying/comments/ex2c4e/the_way_the_rays_pass_through_this_lush_forest_in/",
+          "text": "reddit.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.reddit.com/r/pics/comments/1ry1po/east_java_indonesia/",
+          "text": "reddit.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/223772675228028036/yamabiko-retreat-osaka-japan-by-mohammad-hossein-rabbani-zade/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/particle/307792955802046650/k9-puppy-melts-hearts-by-dozing-off-during-swearing-in-ceremony-i-2024/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/908953137425829597/200-pcs-retro-wall-collage-kit-vintage-poster-wall-collage-kit-retro-posters-90s-posters-80s-posters-retro-room-decor/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/15551561205955387/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.yelp.com/biz/cimmaron-station-arco",
+          "text": "yelp.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.linkedin.com/posts/sanobar-a-63506191_motivation-inspiration-positivity-activity-7214901225656393728-gTQn",
+          "text": "linkedin.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://favim.com/image/8925601/",
+          "text": "favim.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/154600199699768748/poodle-miniature-dog-breed-information/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.facebook.com/PurrfectBowls/",
+          "text": "facebook.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.facebook.com/WisdomRiverLodge/",
+          "text": "facebook.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://wallpapersafari.com/w/cvkGnD",
+          "text": "wallpapersafari.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.dallasprolist.com/boho-bedroom-with-curtain-lights/",
+          "text": "dallasprolist.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.tumblr.com/spookyasmr/750211386518405120",
+          "text": "tumblr.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.behance.net/gallery/148732991/streamer",
+          "text": "behance.net",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/301952350026447162/forest-nymph-by-antiquecameo-on-deviantart/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.facebook.com/newyorktopphoto/photos/10-oldest-cities-in-the-world-/1071150535055110/",
+          "text": "facebook.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.tumblr.com/seamlessoo",
+          "text": "tumblr.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.fashionotography.com/brianna-killion-heck-by-erik-madigan-heck-for-harpers-bazaar-uk-july-2020/",
+          "text": "fashionotography.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.facebook.com/DobermanLovers101/",
+          "text": "facebook.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/885098132988585307/hanging-swing-in-maldives-sunset/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.youtube.com/shorts/d7I5B6TjyYo",
+          "text": "youtube.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.thephoblographer.com/2023/05/15/how-adam-bird-makes-conceptual-fine-art/",
+          "text": "thephoblographer.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://trinityslyle.tumblr.com/post/687890934594174976/bungalow-home-on-clear-turquoise-blue-water",
+          "text": "trinityslyle.tumblr.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://amberandmuse.com/tropical-beach-bride-from-bali/",
+          "text": "amberandmuse.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/8022105578166197/exclusive-prints-from-lindsay-adler/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/261208847128569168/art/",
+          "text": "artofit.org",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.facebook.com/africahhope/",
+          "text": "facebook.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://raypoetryandlifestyle.wordpress.com/2020/10/28/admiring/",
+          "text": "raypoetryandlifestyle.wordpress.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://www.facebook.com/humanlogistics/",
+          "text": "facebook.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "https://medium.com/@andreea128r/a-spoonful-of-luxury-top-5-most-expensive-pastas-in-the-world-32ed4893e1dd",
+          "text": "medium.com",
+          "tag": "a",
+          "attr": "href"
+        },
+        {
+          "url": "http://schemas.live.com/Web/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "http://pinterest.com/pin/create/button/?url=",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.onenote.com/clipper/save?appName=BingImages&sourceUrl={0}&imgUrl={1}&title={2}&description={3}¬es={4",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "http://pm1.aminoapps.com/7586/1a5e7ea6843e14502202fb764e2360a9560189f5r1-750-1125v2_uhq.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://preview.redd.it/aang-vs-paul-atreides-avatar-vs-dune-a-balanced-voice-v0-tkd7er91xobc1.jpeg?width=2048&format=pjpg&auto=webp&s=75507238a777c1be7793b85123281fcd22fca478",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/8be46841301279.57a0b98b87e01.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://preview.redd.it/ffpf4zi6g9e41.jpg?auto=webp&s=6ea309e242c0430b64b79d5b948eb38726defb2b",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://external-preview.redd.it/5HEPnRFEzkbWN57wcSdiMEje1DV92GB-bEkXKKnuCP8.jpg?auto=webp&s=784a9a7f1cb0f1593116e4e02205d8373f3ddbd6",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/aa/0a/83/aa0a8307fc42f9a46b7d7474f5288ac9.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/e0/56/89/e056891a861e19fdcf14c20b16c62997.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/ab/3a/4a/ab3a4a916f157c0afe3c8895b99592db.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/3c/af/28/3caf28244812b8beb5e0763b2a25866d.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://s3-media0.fl.yelpcdn.com/bphoto/YNzWn8XDJXNOzEY7zgzt_w/o.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://media.licdn.com/dms/image/D5622AQEHIml-NbH2Gg/feedshare-shrink_2048_1536/0/1720166496917?e=2147483647&v=beta&t=VjICX2rEA9TmTM5AjKdoo820zn7O1DLqoERq9GM7_zs",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://favim.com/pd/s11/orig/8/892/8925/89256/boy-outfite-healthy-food-Favim.com-8925601.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/cc/1a/a4/cc1aa4e0c377f1209b0cc8c64ba2606a.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=764734858691569",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=4767930333227130",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://cdn.wallpapersafari.com/1/62/cvkGnD.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.dallasprolist.com/wp-content/uploads/2024/07/Radiant-Light-Display-768x1152.jpeg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://64.media.tumblr.com/a62465aa8125d2662e624bc72a25cc16/adb2e555418e981f-e1/s1280x1920/cb834eb196070644e736ec8a310a57045d9c1855.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/bdeafe148732991.63e0c2d597e0e.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/0f/48/3f/0f483f8a759eb24db94a6d7a7d437002.png",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1071150535055110",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://64.media.tumblr.com/f2a58b05f1f25ff6d3e74fa425b21abc/2a09d7dc06adc8c4-a8/s1280x1920/91d7770e931b7133e167c7d1f33b813a0cf0b5a8.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.fashionotography.com/wp-content/uploads/2020/07/Brianna-Killion-Heck-by-Erik-Madigan-Heck-for-Harper’s-Bazaar-UK-July-2020-15.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=3566556646725077",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/4b/0b/19/4b0b19ba2156f9591d9488d6e3280298.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.ytimg.com/vi/d7I5B6TjyYo/oardefault.jpg?sqp=-oaymwEkCJUDENAFSFqQAgHyq4qpAxMIARUAAAAAJQAAyEI9AICiQ3gB&rs=AOn4CLBOZ6iURNP8DkhyXCyodUxSj-T1zQ",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.thephoblographer.com/wp-content/uploads/2023/05/Adam-Bird-for-the-Phoblographer5-scaled.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://64.media.tumblr.com/795c6b76064cb1e1e4cb831fb170c9c8/5f115b509b5ac58a-68/s1280x1920/f7a4085d73c72e025dcf0dcaf00abfd368f2b684.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://hochzeitsguide.com/wp-content/uploads/2019/12/bali-bridal-inspirations_0014.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/5c/32/8d/5c328d97ac2e415e7bee9af5ca5b3694.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/a2/0f/a9/a20fa918cade86bbfda18e2f3445d3ca.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100066628083724",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://raypoetryandlifestyle.files.wordpress.com/2020/10/e28aaa6c447b8b5127c7e22dc1086a6e4436143491496189730.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=2294142174027647",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://miro.medium.com/v2/resize:fit:1358/1*4dL0Yp65rDq6deHozzevBQ.jpeg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://storage.live.com/users/0x{0}/myprofile/expressionprofile/profilephoto:UserTileStatic/p?ck=1&ex=720&sid=24D5E3BD25FF688C3E30F427240169ED&fofoff=1",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://storage.live.com/users/0x{0}/myprofile/expressionprofile/profilephoto:UserTileMedium/p?ck=1&ex=720&sid=24D5E3BD25FF688C3E30F427240169ED&fofoff=1",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://srtb.msn.com/auction",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        }
+      ],
+      "visible_text": [
+        "Bing Images",
+        "Quick Saves",
+        "Save",
+        "Saved",
+        "Creating...",
+        "Access your",
+        "Collections",
+        "Saving...",
+        "Removing...",
+        "Save to",
+        "Saved to",
+        "Top choices",
+        "All collections",
+        "Saved Images",
+        "Create a new collection",
+        "Create new collection",
+        "This collection already exists.",
+        "The photos you provided may be used to improve Bing image processing services.",
+        "Privacy Policy",
+        "|",
+        "Terms of Use",
+        "Can't use this link. Check that your link starts with 'http://' or 'https://' to try again.",
+        "Unable to process this search. Please try a different image or keywords.",
+        "Try Visual Search",
+        "Search, identify objects and text, translate, or solve problems using an image",
+        "Drag one or more images here,",
+        "upload an image",
+        "or",
+        "open camera",
+        "Drop image anywhere to start your search",
+        "To use Visual Search, enable the camera in this browser",
+        "Rewards",
+        "All",
+        "Search",
+        "Images",
+        "Create",
+        "Inspiration",
+        "Videos",
+        "Maps",
+        "News",
+        "Copilot",
+        "More",
+        "Shopping",
+        "Flights",
+        "Travel",
+        "Notebook",
+        "Explore trending image topics",
+        "Animals",
+        "Photography",
+        "Beauty",
+        "Vehicles",
+        "Art",
+        "Women's Fashion",
+        "Gaming",
+        "Design",
+        "Fitness And Exercise",
+        "Music",
+        "Sports",
+        "See More",
+        "Images to inspire",
+        "All inspiring images",
+        "aminoapps.com",
+        "The 3 Tails | Mermaid Amino Amino",
+        "reddit.com",
+        "Aang VS Paul Atreides (Avatar VS Dune) - “A Balanced Voice” : r/DeathBattleMatchups",
+        "behance.net",
+        "KINTSUGI on Behance",
+        "The way the rays pass through this lush forest in Netherlands! : r/oddlysatisfying",
+        "East Java, Indonesia : pics",
+        "artofit.org",
+        "Yamabiko retreat osaka japan by mohammad hossein rabbani zade – Artofit",
+        "Best 11 K9 Puppy Melts Hearts By Dozing Off During Swearing-In Ceremony i 2024 – Artofit",
+        "200 pcs retro wall collage kit vintage poster wall collage kit retro posters 90s posters 80s posters retro room decor – Artofit",
+        "Artofit",
+        "yelp.com",
+        "CIMMARON STATION - Updated December 2024 - Request Information - 632 Butte Ave, Arco, Idaho - Apartments - Phone Num…",
+        "linkedin.com",
+        "Sanobar A on LinkedIn: #motivation #inspiration #positivity #mindset #goals #success…",
+        "favim.com",
+        "boy, outfite and healthy food - image #8925601 on Favim.com",
+        "Poodle miniature dog breed information – Artofit",
+        "facebook.com",
+        "Purrfect Bowls",
+        "Wisdom River Lodge | North Adams MA",
+        "wallpapersafari.com",
+        "🔥 Free Download La Camara Es Principal Camera Wallpaper Background Image by @mknox73 | WallpaperSafari",
+        "dallasprolist.com",
+        "29 Boho Bedroom With Curtain Lights To Create A Serene Space |",
+        "tumblr.com",
+        "Image tagged with witchcore, darkcore, gothcore – @spookyasmr on Tumblr",
+        "浮光｜streamer :: Behance",
+        "Forest nymph by antiquecameo on deviantart – Artofit",
+        "New - 10 Oldest Cities in The World. 👇 | Facebook",
+        "Seam_less on Tumblr",
+        "fashionotography.com",
+        "Brianna Killion Heck by Erik Madigan Heck for Harper’s Bazaar UK July 2020",
+        "Doberman Lovers",
+        "Hanging swing in maldives sunset – Artofit",
+        "youtube.com",
+        "McLaren P1 in Pubg🤫 #shorts - YouTube",
+        "thephoblographer.com",
+        "How Adam Bird Makes Conceptual Fine Art",
+        "trinityslyle.tumblr.com",
+        "Trinity 💕 — Bungalow home on clear turquoise blue water 🌞💙🏠🏝🌊",
+        "amberandmuse.com",
+        "Tropical Beach Bride from Bali by Call Me Madame and Stepan Vrzala - Amber & Muse - Fine Art Wedding Blog",
+        "Exclusive prints from lindsay adler – Artofit",
+        "Art – Artofit",
+        "African teens proudly future leaders",
+        "raypoetryandlifestyle.wordpress.com",
+        "Admiring – Ray",
+        "Human Logistics | Toronto ON",
+        "medium.com",
+        "A Spoonful of Luxury: Top 5 Most Expensive Pastas in the World | by Andreea128 | Medium",
+        "More inspiring images",
+        "Report an inappropriate content",
+        "Please select one of the options below.",
+        "Not Relevant",
+        "Offensive",
+        "Adult",
+        "Child Sexual Abuse",
+        "Show less like this",
+        "Report content",
+        "Feedback received",
+        "We'll show fewer items like this.",
+        "Click \"refresh\" to update the feed for you.",
+        "Refresh",
+        "Undo",
+        "Feedback",
+        "© 2026 Microsoft",
+        "Privacy",
+        "Terms",
+        "Advertise",
+        "About our ads",
+        "Help",
+        "Consumer Health Privacy"
+      ],
+      "length": 916659,
+      "url": "https://www.bing.com/images/searchbyimage?cbir=sbi&iss=sbi&imgurl=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg&cc=us&setlang=en",
+      "returncode": 0,
+      "stderr_tail": "address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[3824:3824:0718/181702.253379:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files\n[3824:3824:0718/181702.268854:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[3824:3845:0718/181702.269086:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[3824:3824:0718/181702.281101:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[3824:3845:0718/181702.282078:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[3824:3824:0718/181702.285224:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[3860:3860:0718/181703.929847:ERROR:gpu/command_buffer/service/gles2_cmd_decoder_passthrough.cc:1210] []Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees for trusted content.\n[3824:3848:0718/181704.578395:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n[3824:3848:0718/181704.579849:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n[3824:3848:0718/181704.596005:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n"
+    },
+    "bing_edges": {
+      "title": "Bing Images",
+      "links": [
+        {
+          "url": "http://schemas.live.com/Web/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "http://pinterest.com/pin/create/button/?url=",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.onenote.com/clipper/save?appName=BingImages&sourceUrl={0}&imgUrl={1}&title={2}&description={3}¬es={4",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "http://pm1.aminoapps.com/7586/1a5e7ea6843e14502202fb764e2360a9560189f5r1-750-1125v2_uhq.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://aminoapps.com/c/mermaid-amino/page/blog/the-3-tails/G5DJ_jxeHnuz8JYWeL6vK6zG4VZRojP0nng",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://64.media.tumblr.com/3df94cd3b08d431ce6b416404192adc3/tumblr_oxmma3WFHl1u8wonlo1_1280.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://sssoul.tumblr.com/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=4767930333227130",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.facebook.com/WisdomRiverLodge/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://preview.redd.it/ffpf4zi6g9e41.jpg?auto=webp&s=6ea309e242c0430b64b79d5b948eb38726defb2b",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.reddit.com/r/oddlysatisfying/comments/ex2c4e/the_way_the_rays_pass_through_this_lush_forest_in/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/e0/56/89/e056891a861e19fdcf14c20b16c62997.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/particle/307792955802046650/k9-puppy-melts-hearts-by-dozing-off-during-swearing-in-ceremony-i-2024/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/736x/1b/e2/cb/1be2cbacbe65976d3167011327a9df8b.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.bluerecordstudio.com/2020/07/world-best-sports-car-images.html",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=764734858691569",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.facebook.com/PurrfectBowls/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://p4.wallpaperbetter.com/wallpaper/770/797/100/trees-night-lights-river-wallpaper-preview.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.wallpaperbetter.com/en/hd-wallpaper-axxma",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/50/f8/ed/50f8ed95921f38e8f786b47fb50cbfa0.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/rolls-royce-phantom-viii/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://s3-media0.fl.yelpcdn.com/bphoto/YNzWn8XDJXNOzEY7zgzt_w/o.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.yelp.com/biz/cimmaron-station-arco",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://64.media.tumblr.com/f2a58b05f1f25ff6d3e74fa425b21abc/2a09d7dc06adc8c4-a8/s1280x1920/91d7770e931b7133e167c7d1f33b813a0cf0b5a8.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.tumblr.com/seamlessoo",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://images.scrolller.com/femto/running-through-a-sprinkler-we-couldnt-get-enough-dozifs90rk.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://scrolller.com/running-through-a-sprinkler-we-couldnt-get-enough-pp9ed1tg4q",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/1b/a8/fb/1ba8fb4f5d5dea00f8a57633fe208af0.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/particle/2674081024281643/ethereal-elegance-natural-spring-makeup/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/ac/a7/0f/aca70f7dc09acc0c1d7638239afb9681.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/1069042030271871142/art-reference-woman-lighting/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/5d/4c/08/5d4c085760ff0d3b1ade9eadb7ddd4b4.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/933371091498126989/dreamy-landscapes-at-night-inspired-by-space-stars-and-video-games/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.mdel.net/oftheminute/images/2017/08/MDC_OLIVERTWIST3820_2-1012x1362.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://models.com/oftheminute/?p=96664",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1071150535055110",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.facebook.com/newyorktopphoto/photos/10-oldest-cities-in-the-world-/1071150535055110/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/c7/ba/9b/c7ba9b751a9d3f8385cf132b9fe45db5.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/545498573626845782/fantastical-flitherings/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.horseandman.com/wp-content/uploads/2023/10/386558836_890968205718891_5853983295004344322_n.jpeg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.horseandman.com/saturday-phoblog/saturday-is-phoblog-day-366/10/06/2023/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://media.licdn.com/dms/image/v2/C4E22AQETmbQqTAYPLA/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1637964947840?e=2147483647&v=beta&t=c7WfAdJoDGHbqgU55DUEQOT2kOidb2xJUcKx8Ijx_44",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.linkedin.com/posts/george-karam-946a5a211_my-artwork-activity-6870122938159439872-gqJw",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "http://downwardscausation.com/wp-content/uploads/2015/12/LD01.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "http://downwardscausation.com/tag/laurence-demaison/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.thephoblographer.com/wp-content/uploads/2023/05/Adam-Bird-for-the-Phoblographer5-scaled.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.thephoblographer.com/2023/05/15/how-adam-bird-makes-conceptual-fine-art/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.dallasprolist.com/wp-content/uploads/2024/07/Radiant-Light-Display-768x1152.jpeg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.dallasprolist.com/boho-bedroom-with-curtain-lights/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://favim.com/pd/s11/orig/8/892/8925/89256/boy-outfite-healthy-food-Favim.com-8925601.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://favim.com/image/8925601/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.ytimg.com/vi/d7I5B6TjyYo/oardefault.jpg?sqp=-oaymwEkCJUDENAFSFqQAgHyq4qpAxMIARUAAAAAJQAAyEI9AICiQ3gB&rs=AOn4CLBOZ6iURNP8DkhyXCyodUxSj-T1zQ",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.youtube.com/shorts/d7I5B6TjyYo",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/33/bc/f7/33bcf789908a9a6bd821e2386e575917.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/652670171012295224/witchy-aesthetic/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100066628083724",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.facebook.com/africahhope/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/8f/f8/79/8ff879b653bba3783e17793e34bb2061.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/ee/64/cd/ee64cd8dccb862d0a5407061a7d6f276.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/956240933361698012/20-very-best-greek-islands-to-visit/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/a2/0f/a9/a20fa918cade86bbfda18e2f3445d3ca.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/261208847128569168/art/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/13/95/8a/13958a1ef2d1c52482ec0eadb4005f83.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/ancient-egyptian-pharaoh/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://i.pinimg.com/originals/eb/d7/93/ebd793443e08055042fb88ce8717eefc.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.artofit.org/image-gallery/397090892147777629/it-s-a-beautiful-world-фото/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://miro.medium.com/v2/resize:fit:1358/1*4dL0Yp65rDq6deHozzevBQ.jpeg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://medium.com/@andreea128r/a-spoonful-of-luxury-top-5-most-expensive-pastas-in-the-world-32ed4893e1dd",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.fashionotography.com/wp-content/uploads/2020/07/Brianna-Killion-Heck-by-Erik-Madigan-Heck-for-Harper’s-Bazaar-UK-July-2020-15.jpg",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.fashionotography.com/brianna-killion-heck-by-erik-madigan-heck-for-harpers-bazaar-uk-july-2020/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=2294142174027647",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://www.facebook.com/humanlogistics/",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://storage.live.com/users/0x{0}/myprofile/expressionprofile/profilephoto:UserTileStatic/p?ck=1&ex=720&sid=0032F9534D8E65132FB8EEC94CE664B6&fofoff=1",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://storage.live.com/users/0x{0}/myprofile/expressionprofile/profilephoto:UserTileMedium/p?ck=1&ex=720&sid=0032F9534D8E65132FB8EEC94CE664B6&fofoff=1",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        },
+        {
+          "url": "https://srtb.msn.com/auction",
+          "text": "embedded",
+          "tag": "script",
+          "attr": "regex"
+        }
+      ],
+      "visible_text": [
+        "Bing Images",
+        "Quick Saves",
+        "Save",
+        "Saved",
+        "Creating...",
+        "Access your",
+        "Collections",
+        "Saving...",
+        "Removing...",
+        "Save to",
+        "Saved to",
+        "Top choices",
+        "All collections",
+        "Saved Images",
+        "Create a new collection",
+        "Create new collection",
+        "This collection already exists.",
+        "Rewards",
+        "All",
+        "Search",
+        "Images",
+        "Create",
+        "Inspiration",
+        "Videos",
+        "Maps",
+        "News",
+        "Copilot",
+        "More",
+        "Shopping",
+        "Flights",
+        "Travel",
+        "Notebook",
+        "Explore trending image topics",
+        "Animals",
+        "Photography",
+        "Beauty",
+        "Vehicles",
+        "Art",
+        "Women's Fashion",
+        "Gaming",
+        "Design",
+        "Fitness And Exercise",
+        "Music",
+        "Sports",
+        "See More",
+        "Images to inspire",
+        "All inspiring images",
+        "aminoapps.com",
+        "The 3 Tails | Mermaid Amino Amino",
+        "sssoul.tumblr.com",
+        "soul of nature",
+        "facebook.com",
+        "Wisdom River Lodge | North Adams MA",
+        "reddit.com",
+        "The way the rays pass through this lush forest in Netherlands! : r/oddlysatisfying",
+        "artofit.org",
+        "Best 11 K9 Puppy Melts Hearts By Dozing Off During Swearing-In Ceremony i 2024 – Artofit",
+        "bluerecordstudio.com",
+        "World Best Sports Car Images | New Cars Review",
+        "Purrfect Bowls",
+        "wallpaperbetter.com",
+        "Trees, night, lights, river, home, China, Hunan Province, HD wallpaper | Wallpaperbetter",
+        "Rolls royce phantom viii – Artofit",
+        "yelp.com",
+        "CIMMARON STATION - Updated December 2024 - Request Information - 632 Butte Ave, Arco, Idaho - Apartments - Phone Num…",
+        "tumblr.com",
+        "Seam_less on Tumblr",
+        "scrolller.com",
+        "\"Running through a Sprinkler ~ we couldn't get enough of this...all summer\" by Lacie Widseth | Scrolller",
+        "Ethereal Elegance: Natural Spring Makeup – Artofit",
+        "Art reference woman lighting – Artofit",
+        "Dreamy landscapes at night inspired by space stars and video games – Artofit",
+        "models.com",
+        "Beauty Twist – Of The Minute",
+        "New - 10 Oldest Cities in The World. 👇 | Facebook",
+        "Fantastical flitherings – Artofit",
+        "horseandman.com",
+        "SATURDAY IS PHOBLOG DAY! - Horse and Man",
+        "linkedin.com",
+        "George Karam on LinkedIn: My artwork",
+        "downwardscausation.com",
+        "laurence demaison – DOWNWARDS CAUSATION",
+        "thephoblographer.com",
+        "How Adam Bird Makes Conceptual Fine Art",
+        "dallasprolist.com",
+        "29 Boho Bedroom With Curtain Lights To Create A Serene Space |",
+        "favim.com",
+        "boy, outfite and healthy food - image #8925601 on Favim.com",
+        "youtube.com",
+        "McLaren P1 in Pubg🤫 #shorts - YouTube",
+        "Witchy aesthetic – Artofit",
+        "African teens proudly future leaders",
+        "bing.com",
+        "20 very best greek islands to visit – Artofit",
+        "Art – Artofit",
+        "Ancient egyptian pharaoh – Artofit",
+        "It s a beautiful world фото – Artofit",
+        "medium.com",
+        "A Spoonful of Luxury: Top 5 Most Expensive Pastas in the World | by Andreea128 | Medium",
+        "fashionotography.com",
+        "Brianna Killion Heck by Erik Madigan Heck for Harper’s Bazaar UK July 2020",
+        "Human Logistics | Toronto ON",
+        "More inspiring images",
+        "Report an inappropriate content",
+        "Please select one of the options below.",
+        "Not Relevant",
+        "Offensive",
+        "Adult",
+        "Child Sexual Abuse",
+        "Show less like this",
+        "Report content",
+        "Feedback received",
+        "We'll show fewer items like this.",
+        "Click \"refresh\" to update the feed for you.",
+        "Refresh",
+        "Undo",
+        "Privacy",
+        "Terms"
+      ],
+      "length": 825249,
+      "url": "https://edgeservices.bing.com/images/searchbyimage?cbir=sbi&iss=sbi&imgurl=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg&cc=us&setlang=en",
+      "returncode": 0,
+      "stderr_tail": "ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4053:4074:0718/181705.708629:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4053:4053:0718/181705.733498:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files\n[4053:4053:0718/181705.733850:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4053:4074:0718/181705.733947:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4053:4053:0718/181705.742656:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4053:4074:0718/181705.742796:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4053:4053:0718/181705.755601:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4053:4077:0718/181707.916850:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n[4053:4077:0718/181707.921220:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n[4053:4077:0718/181707.927341:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n"
+    },
+    "yandex": {
+      "title": "Yandex Images: search for images",
+      "links": [
+        {
+          "url": "https://ads.adfox.ru",
+          "text": "",
+          "tag": "link",
+          "attr": "href"
+        }
+      ],
+      "visible_text": [
+        "Yandex Images: search for images",
+        "Uploading image",
+        "Search",
+        "Log in",
+        "Web",
+        "Yandex AI",
+        "Images",
+        "Video",
+        "Maps",
+        "Translate",
+        "Additional information about this search",
+        "No matching results.",
+        "Richmond",
+        "Contact us",
+        "Help",
+        "Settings",
+        "About",
+        "License",
+        "Privacy Policy",
+        "Terms and Conditions",
+        "Notifications about copyrights",
+        "©",
+        "2011–2026",
+        "YANDEX LLC",
+        "Yandex uses cookies",
+        "They ensure the smooth operation of all Yandex sites and services. For more information, please read our",
+        "Cookie Policy",
+        "Allow all",
+        "Allow essential cookies",
+        "Cookie settings",
+        "Yandex uses technical cookies to ensure the site/app functions properly. However, we would also like to use optional marketing, analytics, and other types of cookies. These cookies help Yandex improve services, your experience, and ad relevancy. For more information about cookies, please read our",
+        "Technical, always active",
+        "These cookies are necessary for crucial web browsing functions, such as authorization or navigation. They are essential to the service's functionality, so they are used by default.",
+        "Analytics/marketing",
+        "These cookies improve the quality of Yandex services. They remember preference settings, anonymously analyze website traffic, and help displaying relevant ads.",
+        "Other cookies",
+        "These cookies are non-essential. They help to improve the experience of working on Yandex services and websites. They help to restore web page sessions, remember preferred regions, save personal preferences, and more.",
+        "Allow selected cookies"
+      ],
+      "length": 303599,
+      "url": "https://yandex.com/images/search?rpt=imageview&url=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg&lang=en",
+      "returncode": 0,
+      "stderr_tail": "ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4290:4311:0718/181709.120037:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4290:4290:0718/181709.146747:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files\n[4290:4290:0718/181709.146784:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4290:4311:0718/181709.152963:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4290:4290:0718/181709.164940:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4290:4311:0718/181709.165149:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4290:4290:0718/181709.175592:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4290:4314:0718/181711.298146:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n[4290:4314:0718/181711.323169:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n[4290:4314:0718/181711.324286:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n"
+    },
+    "tineye": {
+      "title": "Just a moment...",
+      "links": [
+        {
+          "url": "https://challenges.cloudflare.com/turnstile/v0/b/3104729c556c/api.js?onload=WBul8&render=explicit",
+          "text": "",
+          "tag": "script",
+          "attr": "src"
+        }
+      ],
+      "visible_text": [
+        "Just a moment...",
+        "Please wait a moment.",
+        "Checking your browser before accessing",
+        "tineye.com",
+        ". If",
+        "you’re asked to complete a verification, go ahead — otherwise just wait a few seconds",
+        "for the check to complete.",
+        "Ray ID: a1d37b73f826d660",
+        "Verification successful. Waiting for tineye.com to respond",
+        "Enable JavaScript and cookies to continue"
+      ],
+      "length": 18364,
+      "url": "https://tineye.com/search?url=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg",
+      "returncode": 0,
+      "stderr_tail": "asOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4513:4513:0718/181715.915400:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4513:4513:0718/181715.934920:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4513:4513:0718/181715.935152:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4513:4534:0718/181715.935943:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4513:4513:0718/181715.953770:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4513:4513:0718/181715.953853:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files\n[4513:4534:0718/181715.953960:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4513:4513:0718/181715.976937:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4513:4534:0718/181715.977088:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4513:4513:0718/181715.987616:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n"
+    },
+    "sogou": {
+      "title": "搜狗图片搜索 - 上网从搜狗开始",
+      "links": [],
+      "visible_text": [
+        "搜狗图片搜索 - 上网从搜狗开始",
+        "×",
+        "截图后,Ctrl+V到输入框",
+        "“",
+        "”后面的文字被忽略，搜狗的查询限制在40个汉字以内。",
+        "通用识图",
+        "找高清大图",
+        "人物识别",
+        "准确快速地检测图像中的内容信息",
+        "本地上传",
+        "将图片拖至此处",
+        "正在上传文件...",
+        "网页",
+        "资讯",
+        "微信",
+        "知乎",
+        "图片",
+        "视频",
+        "医疗",
+        "汉语",
+        "翻译",
+        "问问",
+        "百科",
+        "更多",
+        "地图",
+        "知识",
+        "应用",
+        "全部",
+        "无障碍",
+        "很抱歉没有找到相关图片结果",
+        "请重新上传其他图片",
+        "全部尺寸",
+        "精选推荐",
+        "人间富贵花出击!景甜穿深V黑纱百花刺绣礼服优雅极致",
+        "8张",
+        "图说新闻",
+        "姚晨早春街拍美照曝光 穿黑色皮衣小露蛮腰性感时髦",
+        "6张",
+        "刘雯胶片质感大片曝光 微醺灯光下展现女性优雅自如的力量",
+        "章子怡刘嘉玲女神气场足 王俊凯宋亚轩等同场",
+        "12张",
+        "宋佳梳马尾穿个性花衬衫 单手托腮眼神霸气",
+        "13张",
+        "师兄弟同框!王俊凯宋亚轩一前一后下飞机梦幻养眼",
+        "李现最新时尚大片释出 穿灰蓝色西装眼神坚毅有光",
+        "baby穿黑裙露美背复古妖娆 红唇吸睛",
+        "王鸥拍大片慵懒魅惑 穿无袖裙尽显曼妙身姿",
+        "7张",
+        "周迅最新时尚大片曝光 休闲T恤搭配格子短裙清新靓丽",
+        "5张",
+        "加载更多内容...",
+        "您的反馈我们已收到，谢谢！",
+        "对结果哪方面不满意？",
+        "壁纸不全",
+        "图片质量不高",
+        "尺寸太少",
+        "百科信息不匹配",
+        "商品信息不精确",
+        "相似图片不准",
+        "其他",
+        "请选择问题类型",
+        "意见",
+        "反馈",
+        "返回",
+        "顶部"
+      ],
+      "length": 49270,
+      "url": "https://pic.sogou.com/ris?query=https%3A%2F%2Fraw.githubusercontent.com%2FNetKingJ%2Fsum_test2%2Fwhereami-reverse-search%2Fwhereami-reverse-search%2Fwhereami-small.jpg&flag=1&drag=0",
+      "returncode": 0,
+      "stderr_tail": "y.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4693:4693:0718/181718.030394:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4693:4714:0718/181718.033038:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4693:4693:0718/181718.046950:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4693:4693:0718/181718.047148:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files\n[4693:4714:0718/181718.047269:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4693:4693:0718/181718.057260:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4693:4714:0718/181718.058974:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")\n[4693:4693:0718/181718.060118:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: \n[4693:4717:0718/181720.550084:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT\n[4693:4717:0718/181720.555184:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: PHONE_REGISTRATION_ERROR\n"
+    }
+  }
+}
